@@ -8,5 +8,7 @@
 /.ssh/
 /.xsession-errors
 /bin/
+/desk/
 /etc/secret/
 /src/ext/
+/tmp/

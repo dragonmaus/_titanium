@@ -12,5 +12,8 @@ home="$(cd "$home" && env - "PATH=$PATH" pwd)"
 "$home/bin/install" sh fmt.ksh
 "$home/bin/install" sh git-ignore
 "$home/bin/install" sh ignore
+"$home/bin/install" sh randomise-wallpaper
+"$home/bin/install" sh remote-display
+"$home/bin/install" sh set-wallpaper
 "$home/bin/install" sh shar
 "$home/bin/install" sh syscall
