@@ -1,0 +1,6 @@
+[push]
+	default = simple
+	followTags = true
+
+[include]
+	path = ~/etc/secret/gitconfig

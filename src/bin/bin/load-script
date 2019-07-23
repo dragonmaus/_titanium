@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+home="$(dirname "$0")/.."
+home="$(cd "$home" && env - "PATH=$PATH" pwd)"
+
+main="$1"
+file="$2"
+shift 2
+
+[[ -e $main && $file -nt $main ]] && rm -f "$main" || :
+[[ -e $main ]] || ( cp -f "$file" "$main" && chmod +x "$main" )

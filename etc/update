@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+d=$0.d
+
+[[ $# -eq 0 ]] && set -- $(ls -F "$d" | sed -n 's/\.sh\*$//p')
+
+for f
+do
+	f="$d/$f.sh"
+	[[ -f "$f" && -s "$f" ]] && . "$f"
+done

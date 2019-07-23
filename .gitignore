@@ -1,0 +1,12 @@
+*-
+/.*.scores
+/.Xauthority
+/.forward
+/.hack/
+/.history
+/.sndio/
+/.ssh/
+/.xsession-errors
+/bin/
+/etc/secret/
+/src/ext/

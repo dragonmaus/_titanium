@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+home="$(dirname "$0")/.."
+home="$(cd "$home" && env - "PATH=$PATH" pwd)"
+
+#"$HOME/src/lib/bin/install-all"
+
+"$home/bin/install" sed cdiff
+"$home/bin/install" sh boring
+"$home/bin/install" sh dircp
+"$home/bin/install" sh fmt.ksh
+"$home/bin/install" sh git-ignore
+"$home/bin/install" sh ignore
+"$home/bin/install" sh shar
+"$home/bin/install" sh syscall
