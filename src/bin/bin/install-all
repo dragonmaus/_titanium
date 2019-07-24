@@ -17,3 +17,4 @@ home="$(cd "$home" && env - "PATH=$PATH" pwd)"
 "$home/bin/install" sh set-wallpaper
 "$home/bin/install" sh shar
 "$home/bin/install" sh syscall
+"$home/bin/install" sh xlock
