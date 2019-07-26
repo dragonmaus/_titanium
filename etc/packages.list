@@ -1,6 +1,9 @@
 GraphicsMagick--
 ald--
 cmatrix--
+dmenu--
+dstat--
+dwm--
 git--
 hack-fonts--
 hexedit--
@@ -8,6 +11,8 @@ nasm--
 p7zip--
 pstree--
 quirks--
+slock--
 sqlports--
+st--
 unzip--
 xsel--

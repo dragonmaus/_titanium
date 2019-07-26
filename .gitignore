@@ -1,6 +1,7 @@
 *-
 /.*.scores
 /.Xauthority
+/.cache/
 /.forward
 /.hack/
 /.history
