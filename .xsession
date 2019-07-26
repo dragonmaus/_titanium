@@ -3,9 +3,13 @@
 PATH="$HOME/bin:$PATH"
 export PATH
 
-printenv | grep '^SSH' | sort >"$HOME/tmp/ssh-agent.env"
+printenv DISPLAY >"$HOME/tmp/x.env.display"
+{
+	printenv | grep -e '^SSH_AGENT_PID=' -e '^SSH_AUTH_SOCK=' | sort
+	echo echo Agent pid \$SSH_AGENT_PID
+} >"$HOME/tmp/x.env.ssh"
+nohup rmafter $$ "$HOME/tmp/x.env.display" "$HOME/tmp/x.env.ssh" 2>&1 >/dev/null &
 
 randomise-wallpaper -s
-
-dstat wpi0 &
+dstat wpi0 >/dev/null &
 exec dwm

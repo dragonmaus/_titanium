@@ -4,5 +4,4 @@ set -e
 home="$(dirname "$0")/.."
 home="$(cd "$home" && env - "PATH=$PATH" pwd)"
 
-#"$HOME/src/lib/bin/clean-all"
 "$home/bin/clean"

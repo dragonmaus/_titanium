@@ -1,2 +1,2 @@
 #!/bin/sh
-exec cc -c -nostdinc -I "$HOME/inc" "$@"
+exec cc -c "$@"

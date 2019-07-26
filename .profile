@@ -30,7 +30,7 @@ PATH="$path"
 # Configuration
 EDITOR="$(command -v vi)"
 [[ -f "$HOME/etc/locale.conf" ]] && . "$HOME/etc/locale.conf"
-[[ -f "$HOME/tmp/ssh-agent.env" ]] && . "$HOME/tmp/ssh-agent.env" && [[ -n "$SSH_AGENT_PID" ]] && print "Agent pid $SSH_AGENT_PID"
+[[ -f "$HOME/tmp/x.env.ssh" ]] && . "$HOME/tmp/x.env.ssh"
 
 # Application-specific
 HACKDIR="$HOME/.hack"

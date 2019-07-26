@@ -12,5 +12,6 @@
 /bin/
 /desk/
 /etc/secret/
+/src/**/*.o
 /src/ext/
 /tmp/

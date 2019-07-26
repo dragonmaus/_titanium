@@ -1,2 +1,2 @@
 #!/bin/sh
-exec ld -nostdlib -static -L "$HOME/lib" "$@"
+exec cc -static "$@"
