@@ -2,10 +2,6 @@
 
 # User-specific shell login profile
 
-XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"$HOME/.config"}"
-XDG_CACHE_HOME="${XDG_CACHE_HOME:-"$HOME/.cache"}"
-XDG_DATA_HOME="${XDG_DATA_HOME:-"$HOME/.local/share"}"
-
 # Clean up PATH
 command -v realpath >/dev/null || realpath() ( cd "$1" && env - "PATH=$PATH" pwd ) 2>/dev/null
 path=
@@ -33,7 +29,8 @@ PATH="$path"
 
 # Configuration
 EDITOR="$(command -v vi)"
-[[ -f $XDG_CONFIG_HOME/locale.conf ]] && . "$XDG_CONFIG_HOME/locale.conf"
+[[ -f "$HOME/etc/locale.conf" ]] && . "$HOME/etc/locale.conf"
+[[ -f "$HOME/tmp/ssh-agent.env" ]] && . "$HOME/tmp/ssh-agent.env" && [[ -n "$SSH_AGENT_PID" ]] && print "Agent pid $SSH_AGENT_PID"
 
 # Application-specific
 HACKDIR="$HOME/.hack"
