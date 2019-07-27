@@ -2,10 +2,12 @@
 /.*.scores
 /.Xauthority
 /.cache/
+/.config/wesnoth/
 /.corewars
 /.forward
 /.hack/
 /.history
+/.local/
 /.sndio/
 /.ssh/
 /.xsession-errors
