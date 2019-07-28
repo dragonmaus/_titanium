@@ -11,5 +11,7 @@ printenv DISPLAY >"$HOME/tmp/x.env.display"
 nohup rmafter $$ "$HOME/tmp/x.env.display" "$HOME/tmp/x.env.ssh" 2>&1 >/dev/null &
 
 randomise-wallpaper -s
+redshift-hack &
+
 dstat wpi0 >/dev/null &
 exec dwm
