@@ -8,9 +8,9 @@ cgames--
 chromium-bsu--
 corewars--
 crimson--
-dmenu--
-dstat--
-dwm--
+dmenu-custom--
+dstat-custom--
+dwm-custom--
 git--
 hack-fonts--
 hexedit--
@@ -18,9 +18,9 @@ nasm--
 p7zip--
 pstree--
 quirks--
-redshift--
+redshift-console--
 rust--
-slock--
-st--
+slock-custom--
+st-custom--
 wesnoth--
 xsel--
