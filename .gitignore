@@ -3,9 +3,13 @@
 /.*.scores
 /.Xauthority
 /.cache/
+/.config/netsurf/
+/.dillo/
+/.fltk/
 /.forward
 /.hack/
 /.history
+/.links/
 /.local/
 /.sndio/
 /.ssh/
