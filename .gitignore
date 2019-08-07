@@ -3,6 +3,7 @@
 /.*.scores
 /.Xauthority
 /.cache/
+/.config/gtk-2.0/
 /.config/netsurf/
 /.dillo/
 /.fltk/
