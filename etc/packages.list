@@ -10,6 +10,7 @@ hack-fonts--
 hexedit--
 links+--
 netsurf--
+openttd--
 p7zip--
 pstree--
 quirks--
@@ -17,4 +18,5 @@ redshift-console--
 rust--
 slock-custom--
 st-custom--
+wesnoth--
 xsel--

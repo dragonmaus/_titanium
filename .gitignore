@@ -5,6 +5,8 @@
 /.cache/
 /.config/gtk-2.0/
 /.config/netsurf/
+/.config/openttd/
+/.config/wesnoth/
 /.dillo/
 /.fltk/
 /.forward
