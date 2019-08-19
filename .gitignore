@@ -1,3 +1,4 @@
+*+
 *-
 *.core
 /.*.scores
@@ -20,6 +21,7 @@
 /bin/
 /desk/
 /etc/secret/
+/mbox
 /src/**/*.o
 /src/ext/
 /tmp/
