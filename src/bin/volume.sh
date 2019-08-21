@@ -27,6 +27,7 @@ case "$*" in
 ('')
 	level=$(getlevel)
 	percent=$(level2percent)
+	level=$(percent2level)
 	printlevel
 	exit 0
 	;;
