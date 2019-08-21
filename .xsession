@@ -12,6 +12,9 @@ nohup rmafter $$ "$HOME/tmp/x.env.display" "$HOME/tmp/x.env.ssh" 2>&1 >/dev/null
 
 randomise-wallpaper -s
 redshift-hack &
+xautolock -detectsleep -secure -locker slock -time 10 &
+
+xset s off
 
 dstat wpi0 >/dev/null &
 exec dwm
