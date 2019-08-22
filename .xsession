@@ -14,6 +14,8 @@ randomise-wallpaper -s
 redshift-hack &
 xautolock -detectsleep -secure -locker slock -time 10 &
 
+xset +dpms
+xset dpms 300 600 900
 xset s off
 
 dstat wpi0 >/dev/null &
