@@ -4,7 +4,9 @@
 /.*.scores
 /.Xauthority
 /.cache/
+/.config/Pinta/
 /.config/gtk-2.0/
+/.config/mono.addins/
 /.config/netsurf/
 /.config/openttd/
 /.config/wesnoth/
