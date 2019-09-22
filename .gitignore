@@ -4,6 +4,7 @@
 /.*.scores
 /.Xauthority
 /.cache/
+/.cargo/
 /.config/0ad/
 /.config/Pinta/
 /.config/gtk-2.0/
