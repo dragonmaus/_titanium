@@ -1,6 +1,9 @@
 *+
 *-
 *.core
+*.exe
+*.o
+.redo/
 /.*.scores
 /.Xauthority
 /.cache/
@@ -27,6 +30,5 @@
 /desk/
 /etc/secret/
 /mbox
-/src/**/*.o
 /src/ext/
 /tmp/

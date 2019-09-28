@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+home="$(dirname "$0")/.."
+home="$(cd "$home" && env - "PATH=$PATH" pwd)"
+
+main="$1"
+shift
+
+exec "$home/bin/ld" -o "$main" "$@"

@@ -2,11 +2,12 @@
 
 cd "$HOME/desk/pictures/wallpapers"
 
-current="$(readlink .current 2>/dev/null)"
+current="$( readlink .current )"
+
 random="$current"
 while [[ "$random" = "$current" ]]
 do
-	random="$(ls *.jpg *.png digitalblasphemy/.current/* 2>/dev/null | sort -R | head -n 1)"
+	random="$( ls *.png digitalblasphemy/.current/* 2> /dev/null | sort -R | head -n 1 )"
 done
 
 ln -fs "$random" .current

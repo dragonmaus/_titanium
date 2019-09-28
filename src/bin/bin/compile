@@ -1,12 +1,3 @@
 #!/bin/sh
-set -e
 
-home="$(dirname "$0")/.."
-home="$(cd "$home" && env - "PATH=$PATH" pwd)"
-
-file="$1"
-shift
-
-obj="${file%.c}.o"
-
-exec "$home/bin/cc" -o "$obj" "$file" "$@"
+exec cc -c "$@"

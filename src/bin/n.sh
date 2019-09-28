@@ -1,2 +1,3 @@
 #!/bin/sh
-exec c "$@" </dev/null
+
+exec c "$@" < /dev/null

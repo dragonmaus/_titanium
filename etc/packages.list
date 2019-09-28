@@ -14,6 +14,7 @@ git--
 hack-fonts--
 hexedit--
 links+--
+nasm--
 neovim--
 netsurf--
 openttd--
@@ -29,4 +30,5 @@ st-custom--
 taisei--
 wesnoth--
 xautolock--
+xdotool--
 xsel--

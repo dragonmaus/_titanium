@@ -1,24 +1,41 @@
 #!/bin/sh
+
 set -e
 
-repo="$(while :; do [[ -d .git ]] && pwd -P && exit; [[ . -ef .. ]] && exit; cd ..; done)"
-[[ -n "$repo" ]]
+echo() {
+	print -r -- "$*"
+}
 
-file="$repo/.gitignore"
-[[ -f "$file" ]] || touch "$file"
+set -o physical
+while :
+do
+	[[ -d .git ]] && break
+	[[ . -ef .. ]] && die 1 "$name: Not inside a git repository"
+	cd ..
+done
 
-rm -f "$file{tmp}"
+file="$PWD/.gitignore"
+[[ -f "$file" ]] || : >> "$file"
+
+rm -f "$file.tmp"
 for line
 do
-	print -r -- "$line"
-done | cat "$file" - | sort -u >"$file{tmp}"
+	echo "$line"
+done | cat "$file" - | sort -u | grep . > "$file.tmp"
 
-rm -f "$file{new}"
+rm -f "$file.new"
 {
-	grep -v '^!' <"$file{tmp}" || :
-	grep '^!' <"$file{tmp}" || :
-} >"$file{new}"
-rm -f "$file{tmp}"
+	grep -v '^!' < "$file.tmp" || :
+	grep '^!' < "$file.tmp" || :
+} > "$file.new"
+rm -f "$file.tmp"
 
-cmp -s "$file" "$file{new}" || cp -f "$file{new}" "$file"
-rm -f "$file{new}"
+print -n "Updating $file... "
+if cmp -s "$file" "$file.new"
+then
+	echo 'Nothing to do!'
+else
+	mv -f "$file.new" "$file"
+	echo 'Done!'
+fi
+rm -f "$file.new"
