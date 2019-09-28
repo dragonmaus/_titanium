@@ -1,17 +1,32 @@
 #!/bin/sh
+
 set -e
+
+echo() {
+	print -r -- "$*"
+}
+
+warn() {
+	echo "$*" 1>&2
+}
 
 die() {
 	e="$1"
 	shift
-	print -r -- "$*" 1>&2
+	warn "$*"
 	exit "$e"
 }
 
-name="$(basename "$0" .sh)"
+name="$( basename "$0" .sh )"
 usage="Usage: $name [-hv] from to"
-help="$usage\n\nRecursively copy a directory while preserving permissions.\n\n  -h   display this help\n  -v   print files as they are copied"
+help="$usage
 
+Recursively copy a directory while preserving permissions.
+
+  -h   display this help
+  -v   print files as they are copied"
+
+v=
 while getopts :hv opt
 do
 	case "$opt" in
@@ -21,28 +36,28 @@ do
 	(v)
 		v=v
 		;;
-	(\?)
-		if [[ -n $OPTARG ]]
-		then
-			warn "$name: Unknown option -- $OPTARG"
-			die 100 "$usage"
-		fi
-		break
-		;;
 	(:)
-		if [[ -n $OPTARG ]]
-		then
-			warn "$name: Option requires an argument -- $OPTARG"
-			die 100 "$usage"
-		fi
-		break
+		warn "$name: Option '$OPTARG' requires an argument"
+		die 100 "$usage"
+		;;
+	(\?)
+		warn "$name: Unknown option '$OPTARG'"
+		die 100 "$usage"
 		;;
 	esac
 done
 shift $(( OPTIND - 1 ))
 
-[[ $# -ge 1 ]] || die 100 "missing required 'from' argument\n$usage"
-[[ $# -ge 2 ]] || die 100 "missing required 'to' argument\n$usage"
+if [[ $# -lt 2 ]]
+then
+	warn "$name: Missing argument(s)"
+	die 100 "$usage"
+fi
+
+[[ -e "$1" ]] || die 1 "$name: Could not find '$1': No such file or directory"
+[[ -d "$1" ]] || die 1 "$name: Could not chdir into '$1': Not a directory"
+
+sort="$( which pathsort sort 2> /dev/null | head -1 )"
 
 mkdir -p "$2"
-( cd "$1" && exec find . -print0 ) | sort -z | ( cd "$1" && exec pax -0dwz ) | ( cd "$2" && exec pax -rz -p p )
+( cd "$1" && exec find . -print0 ) | "$sort" -z | ( cd "$1" && exec pax -0dwz ) | ( cd "$2" && exec pax -rz$v -p e )
