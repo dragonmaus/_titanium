@@ -26,6 +26,7 @@ set -a
 # Core
 ENV="$HOME/.shrc"
 PATH="$path"
+MANPATH="$HOME/.local/share/man:"
 
 # Configuration
 EDITOR="$(command -v vi)"
