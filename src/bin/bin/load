@@ -1,3 +1,6 @@
 #!/bin/sh
 
-exec cc -static "$@"
+home="$( dirname "$0" )/.."
+home="$( cd "$home" && env - "PATH=$PATH" pwd )"
+
+exec cc -static -L"$home/lib" "$@"

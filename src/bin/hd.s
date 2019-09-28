@@ -1,6 +1,6 @@
 %define program 'hd'
-%include 'inc/core.m'
-%include 'inc/error.m'
+%include 'core.m'
+%include 'error.m'
 
 	section	.text
 	global	_start
