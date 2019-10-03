@@ -12,8 +12,8 @@
 #endif
 
 void die1(int, const char *);
-void die2(int, const char *, const char *);
-void die3(int, const char *, const char *, const char *);
+void err_die1(int, const char *);
+void err_die2(int, const char *, const char *);
 
   int
 main(int argc, char **argv)
@@ -26,17 +26,17 @@ main(int argc, char **argv)
 
 	if (argc < 3) die1(1, "Usage: rmafter pid file [file ...]");
 	pid = (pid_t)strtonum(argv[1], 0, PID_MAX, &err);
-	if (err) die2(1, "rmafter: strtonum() error", strerror(errno));
+	if (err) err_die1(1, "rmafter: strtonum() error");
 
-	if ((kq = kqueue()) == -1) die2(1, "rmafter: kqueue() error", strerror(errno));
+	if ((kq = kqueue()) == -1) err_die1(1, "rmafter: kqueue() error");
 
 	EV_SET(&ch, pid, EVFILT_PROC, EV_ADD | EV_ENABLE, NOTE_EXIT, 0, 0);
 
 	for (;;) {
 		nev = kevent(kq, &ch, 1, &ev, 1, NULL);
-		if (nev < 0) die2(1, "rmafter: kevent() error", strerror(errno));
+		if (nev < 0) err_die1(1, "rmafter: kevent() error");
 		if (nev > 0) {
-			if (ev.flags & EV_ERROR) die3(1, "rmafter", argv[1], strerror(ev.data));
+			if (ev.flags & EV_ERROR) err_die2(1, "rmafter", argv[1]);
 			break;
 		}
 	}
@@ -54,15 +54,15 @@ die1(int r, const char *s)
 }
 
   void
-die2(int r, const char *s, const char *t)
+err_die1(int r, const char *s)
 {
-	fprintf(stderr, "%s: %s\n", s, t);
+	fprintf(stderr, "%s: %s\n", s, strerror(errno));
 	exit(r);
 }
 
   void
-die3(int r, const char *s, const char *t, const char *u)
+err_die2(int r, const char *s, const char *t)
 {
-	fprintf(stderr, "%s: %s: %s\n", s, t, u);
+	fprintf(stderr, "%s: %s: %s\n", s, t, strerror(errno));
 	exit(r);
 }
