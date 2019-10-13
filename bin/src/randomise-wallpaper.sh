@@ -7,7 +7,7 @@ current="$( readlink .current )"
 random="$current"
 while [[ "$random" = "$current" ]]
 do
-	random="$( ls *.png digitalblasphemy/.current/* 2> /dev/null | sort -R | head -n 1 )"
+	random="$( ls *.png digitalblasphemy/.current/*.jpg 2> /dev/null | sort -R | head -1 )"
 done
 
 ln -fs "$random" .current

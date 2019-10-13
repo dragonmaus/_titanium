@@ -26,9 +26,13 @@
 /.sndio/
 /.ssh/
 /.xsession-errors
-/bin/
+/bin/*
 /desk/
 /etc/secret/
 /mbox
 /src/ext/
+/src/rust/*/
 /tmp/
+!/bin/*.do
+!/bin/all.list
+!/bin/src/

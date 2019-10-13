@@ -1,7 +1,5 @@
-#!/bin/sh
-
 exists() {
-	[[ -e "$1" && -f "$1" && -s "$1" ]]
+	test -e "$1" -a -f "$1" -a -s "$1"
 	return $?
 }
 
@@ -17,8 +15,6 @@ else
 	echo "$0: Fatal: don't know how to build '$1'" 1>&2
 	exit 99
 fi
-
-
 
 if exists "$file.args"
 then

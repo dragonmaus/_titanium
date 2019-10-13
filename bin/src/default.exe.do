@@ -1,7 +1,5 @@
-#!/bin/sh
-
 exists() {
-	[[ -e "$1" && -f "$1" && -s "$1" ]]
+	test -e "$1" -a -f "$1" -a -s "$1"
 	return $?
 }
 
@@ -44,7 +42,7 @@ case "$kind" in
 (script)
 	redo-ifchange "$file"
 
-	cat < "$file" > "$3"
+	cp -f "$file" "$3"
 	chmod +x "$3"
 	;;
 esac
