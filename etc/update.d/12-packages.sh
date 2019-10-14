@@ -1,2 +1,2 @@
 print ">> Updating packages"
-doas pkg_add -u
+doas pkg_add -u || :
