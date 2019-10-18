@@ -1,3 +1,3 @@
+find . -type f -perm /0111 | sed -n 's/^\.\///p' | grep -Fv / | tr '\n' '\0' | xargs -0 rm -fv 1>&2
 redo-ifchange src/clean
-tr '\n' '\0' < all.list | xargs -0 rm -f
 redo-always
