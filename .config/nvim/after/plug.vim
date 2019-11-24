@@ -50,9 +50,6 @@ function! LightlineMaximumpath()
   if ScreenIsNarrow()
     return expand('%:t')
   endif
-  if ScreenIsWide()
-    return SubstituteDirectoryPrefix(expand('%:p'), expand('~'), '~')
-  endif
   return SubstituteDirectoryPrefix(expand('%:p'), getcwd(), '')
 endfunction
 

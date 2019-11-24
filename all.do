@@ -1,1 +1,1 @@
-redo-ifchange bin/all src/rust/all
+redo-ifchange bin/all

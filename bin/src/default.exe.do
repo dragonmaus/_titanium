@@ -8,10 +8,10 @@ then
 	if exists "$2.s.o.args"
 	then
 		redo-ifchange "$2.s.o" bin/load bin/strip "$2.s.o.args"
-		bin/load -nostdlib -o "$3" "$2.s.o" $( cat "$2.s.o.args" )
+		bin/load -o "$3" "$2.s.o" -nostdlib $( cat "$2.s.o.args" )
 	else
 		redo-ifchange "$2.s.o" bin/load bin/strip
-		bin/load -nostdlib -o "$3" "$2.s.o"
+		bin/load -o "$3" "$2.s.o" -nostdlib
 	fi
 	bin/strip "$3"
 elif exists "$2.c"
