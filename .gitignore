@@ -33,8 +33,10 @@
 /.ssh/
 /.xsession-errors
 /bin/*
+/bin/src/*.s
 /bin/src/bin/*
 /bin/src/inc/error.h
+/bin/src/lib/*.s
 /bin/src/lib/error*.c
 /desk/
 /etc/secret/

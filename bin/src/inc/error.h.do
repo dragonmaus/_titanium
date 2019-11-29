@@ -5,10 +5,10 @@ cat > "$3" <<END
 #ifndef ERROR_H
 #define ERROR_H
 
-#if defined __errno
+#if defined __OpenBSD__
 int *__errno(void);
 #define errno (*__errno())
-#elsif defined __errno_location
+#elif defined __linux__
 int *__errno_location(void);
 #define errno (*__errno_location())
 #else
