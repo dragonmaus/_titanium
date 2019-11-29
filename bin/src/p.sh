@@ -1,2 +1,2 @@
 #!/bin/sh
-exec xclip -o "$@"
+exec xsel -o "$@"

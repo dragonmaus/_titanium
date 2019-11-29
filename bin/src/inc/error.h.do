@@ -5,9 +5,15 @@ cat > "$3" <<END
 #ifndef ERROR_H
 #define ERROR_H
 
-// extern int errno;
+#if defined __errno
+int *__errno(void);
+#define errno (*__errno())
+#elsif defined __errno_location
 int *__errno_location(void);
 #define errno (*__errno_location())
+#else
+extern int errno;
+#endif
 
 END
 

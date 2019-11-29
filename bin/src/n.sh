@@ -1,2 +1,2 @@
 #!/bin/sh
-exec c "$@" < /dev/null
+exec xsel -c "$@"
