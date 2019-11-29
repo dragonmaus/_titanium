@@ -1,0 +1,3 @@
+/* automatically generated */
+#include <errno.h>
+#include "error.h"

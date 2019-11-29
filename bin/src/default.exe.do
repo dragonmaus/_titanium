@@ -1,42 +1,44 @@
-exists() {
-	test -e "$1" -a -f "$1" -a -s "$1"
-	return $?
-}
+home="$( cd "$( dirname "$0" )" && env - "PATH=$PATH" pwd )"
 
-if exists "$2.s"
+redo-ifchange "$home/inc/whichsrc.sh"
+. "$home/inc/whichsrc.sh"
+
+if whichsrc "$2.s" > /dev/null
 then
-	if exists "$2.s.o.args"
-	then
-		redo-ifchange "$2.s.o" bin/load bin/strip "$2.s.o.args"
-		bin/load -o "$3" "$2.s.o" -nostdlib $( cat "$2.s.o.args" )
-	else
-		redo-ifchange "$2.s.o" bin/load bin/strip
-		bin/load -o "$3" "$2.s.o" -nostdlib
-	fi
+	redo-ifchange "$2.exe.deps"
+	xargs redo-ifchange bin/load bin/strip "$2.o" < "$2.exe.deps"
+
+	sed -E < "$2.exe.deps" \
+		-e 's|^lib/lib(.+)\.a$|-l\1|' \
+		-e '1i\
+-Wl,--start-group
+' \
+		-e '$a\
+-Wl,--end-group
+' \
+	| xargs bin/load -o "$3" "$2.o" -nostdlib
 	bin/strip "$3"
-elif exists "$2.c"
+elif whichsrc "$2.c" > /dev/null
 then
-	if exists "$2.c.o.args"
-	then
-		redo-ifchange "$2.c.o" bin/load bin/strip "$2.c.o.args"
-		bin/load -o "$3" "$2.c.o" $( cat "$2.c.o.args" )
-	else
-		redo-ifchange "$2.c.o" bin/load bin/strip
-		bin/load -o "$3" "$2.c.o"
-	fi
+	redo-ifchange "$2.exe.deps"
+	xargs redo-ifchange bin/load bin/strip "$2.o" < "$2.exe.deps"
+
+	sed -E < "$2.exe.deps" \
+		-e 's|^lib/lib(.+)\.a$|-l\1|' \
+		-e '1i\
+-Wl,--start-group
+' \
+		-e '$a\
+-Wl,--end-group
+' \
+	| xargs bin/load -o "$3" "$2.o"
 	bin/strip "$3"
+elif src="$( whichsrc "$2.sh" "$2.py" "$2.sed" "$2.calc" )"
+then
+	redo-ifchange "$src"
+	cp -f "$src" "$3"
+	chmod +x "$3"
 else
-	for ext in sh py sed calc
-	do
-		if exists "$2.$ext"
-		then
-			redo-ifchange "$2.$ext"
-			cp -f "$2.$ext" "$3"
-			chmod +x "$3"
-			exit 0
-		fi
-	done
-
-	echo "$0: Fatal: don't know how to build '$1'" 1>&2
+	echo "$0: fatal: don't know how to build '$1'" 1>&2
 	exit 99
 fi

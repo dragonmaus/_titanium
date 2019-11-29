@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+home=`dirname "$0"`/..
+home=`cd "$home" && env - "PATH=$PATH" pwd`
+cd "$home"
+
+"$home"/bin/generate error.h
+
+mkdir -p "$HOME"/inc
+cp -f *.h "$HOME"/inc
+
+"$home"/bin/generate error.c
+"$home"/bin/generate error_str.c
+"$home"/bin/generate error_temp.c
+
+for file in *.[cs]
+do
+	case ${file##*.} in
+	(c)
+		"$home"/bin/compile "$file"
+		;;
+	(s)
+		"$home"/bin/assemble "$file"
+		;;
+	esac
+done
+
+"$home"/bin/makelib libcore.a *.o
+
+mkdir -p "$HOME"/lib
+cp -f libcore.a "$HOME"/lib

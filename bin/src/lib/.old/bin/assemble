@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+home=`dirname "$0"`/..
+home=`cd "$home" && env - "PATH=$PATH" pwd`
+
+file=$1
+shift 1
+
+obj=${file%.s}.o
+
+"$home"/bin/as -o "$obj" "$file" "$@"

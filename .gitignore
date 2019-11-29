@@ -2,8 +2,13 @@
 *-
 *.a
 *.core
+*.deps
 *.exe
+*.log
+*.new
 *.o
+*.tmp
+.git/
 .redo/
 /.*.scores
 /.*history
@@ -29,6 +34,8 @@
 /.xsession-errors
 /bin/*
 /bin/src/bin/*
+/bin/src/inc/error.h
+/bin/src/lib/error*.c
 /desk/
 /etc/secret/
 /etc/wallpaper/*.zip

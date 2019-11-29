@@ -1,0 +1,144 @@
+error_perm	EPERM	hard	permission denied
+error_noent	ENOENT	hard	no such file or directory
+-	ESRCH	hard	no such process
+error_intr	EINTR	soft	interrupted system call
+-	EIO	soft	input/output error
+-	ENXIO	hard	device not configured
+-	E2BIG	hard	argument list too long
+-	ENOEXEC	hard	exec format error
+-	EBADF	hard	file descriptor not open
+-	ECHILD	hard	no child processes
+-	EAGAIN	soft	temporary failure
+-	EWOULDBLOCK	soft	input/output would block
+error_nomem	ENOMEM	soft	out of memory
+error_acces	EACCES	hard	access denied
+-	EFAULT	hard	bad address
+-	ENOTBLK	hard	not a block device
+-	EBUSY	soft	device busy
+-	EEXIST	hard	file already exists
+-	EXDEV	hard	cross-device link
+-	ENODEV	hard	no such device
+-	ENOTDIR	hard	not a directory
+error_isdir	EISDIR	hard	is a directory
+error_inval	EINVAL	hard	invalid argument
+-	ENFILE	soft	system cannot open more files
+-	EMFILE	soft	process cannot open more files
+-	ENOTTY	hard	not a tty
+-	ETXTBSY	soft	text file busy
+-	EFBIG	soft	file too big
+-	ENOSPC	soft	no space left on device
+-	ESPIPE	hard	unseekable descriptor
+-	EROFS	hard	read-only file system
+-	EMLINK	hard	too many links
+-	EPIPE	hard	broken pipe
+-	EDOM	hard	input out of range
+-	ERANGE	hard	output out of range
+-	EDEADLK	soft	operation would cause deadlock
+-	EDEADLOCK	soft	operation would cause deadlock
+-	ENAMETOOLONG	hard	file name too long
+-	ENOLCK	soft	no locks available
+-	ENOSYS	hard	system call not available
+-	ENOTEMPTY	hard	directory not empty
+error_loop	ELOOP	hard	symbolic link loop
+-	ENOMSG	hard	no message of desired type
+-	EIDRM	hard	identifier removed
+-	ECHRNG	!	channel number out of range
+-	EL2NSYNC	!	level 2 not synchronized
+-	EL3HLT	!	level 3 halted
+-	EL3RST	!	level 3 reset
+-	ELNRNG	!	link number out of range
+-	EUNATCH	!	protocol driver not attached
+-	ENOCSI	!	no CSI structure available
+-	EL2HLT	!	level 2 halted
+-	EBADE	!	invalid exchange
+-	EBADR	!	invalid request descriptor
+-	EXFULL	!	exchange full
+-	ENOANO	!	no anode
+-	EBADRQC	!	invalid request code
+-	EBADSLT	!	invalid slot
+-	EBFONT	!	bad font file format
+-	ENOSTR	hard	not a stream device
+-	ENODATA	!	no data available
+-	ETIME	hard	timer expired
+-	ENOSR	hard	out of stream resources
+-	ENONET	hard	machine not on network
+-	ENOPKG	!	package not installed
+-	EREMOTE	hard	too many levels of remote in path
+-	ENOLINK	hard	link severed
+-	EADV	hard	advertise error
+-	ESRMNT	hard	srmount error
+-	ECOMM	hard	communication error
+-	EPROTO	hard	protocol error
+-	EMULTIHOP	hard	multihop attempted
+-	EDOTDOT	!	RFS specific error
+-	EBADMSG	hard	bad message type
+-	EOVERFLOW	!	value too large for defined data type
+-	ENOTUNIQ	!	name not unique on network
+-	EBADFD	!	file descriptor in bad state
+-	EREMCHG	hard	remote address changed
+-	ELIBACC	!	can not access a needed shared library
+-	ELIBBAD	!	accessing a corrupted shared library
+-	ELIBSCN	!	.lib section in a.out corrupted
+-	ELIBMAX	!	attempting to link in too many shared libraries
+-	ELIBEXEC	!	cannot exec a shared library directly
+-	EILSEQ	!	invalid or incomplete multibyte or wide character
+-	ERESTART	!	interrupted system call should be restarted
+-	ESTRPIPE	!	streams pipe error
+-	EUSERS	soft	too many users
+-	ENOTSOCK	hard	not a socket
+-	EDESTADDRREQ	hard	destination address required
+-	EMSGSIZE	hard	message too long
+-	EPROTOTYPE	hard	incorrect protocol type
+-	ENOPROTOOPT	hard	protocol not available
+-	EPROTONOSUPPORT	hard	protocol not supported
+-	ESOCKTNOSUPPORT	hard	socket type not supported
+-	ENOTSUP	!	operation not supported
+-	EOPNOTSUPP	hard	operation not supported
+-	EPFNOSUPPORT	hard	protocol family not supported
+-	EAFNOSUPPORT	hard	address family not supported
+-	EADDRINUSE	hard	address already used
+-	EADDRNOTAVAIL	hard	address not available
+-	ENETDOWN	soft	network down
+-	ENETUNREACH	soft	network unreachable
+-	ENETRESET	soft	network reset
+-	ECONNABORTED	soft	connection aborted
+-	ECONNRESET	soft	connection reset
+-	ENOBUFS	soft	out of buffer space
+-	EISCONN	hard	already connected
+-	ENOTCONN	hard	not connected
+-	ESHUTDOWN	hard	socket shut down
+-	ETOOMANYREFS	soft	too many references
+-	ETIMEDOUT	soft	timed out
+-	ECONNREFUSED	soft	connection refused
+-	EHOSTDOWN	soft	host down
+-	EHOSTUNREACH	soft	host unreachable
+-	EALREADY	hard	operation already in progress
+-	EINPROGRESS	hard	operation in progress
+-	ESTALE	soft	stale file handle
+-	EUCLEAN	!	structure needs cleaning
+-	ENOTNAM	!	not a XENIX named type file
+-	ENAVAIL	!	no XENIX semaphores available
+-	EISNAM	!	is a named type file
+-	EREMOTEIO	!	remote I/O error
+-	EDQUOT	soft	disk quota exceeded
+-	ENOMEDIUM	!	no medium found
+-	EMEDIUMTYPE	!	wrong medium type
+-	ECANCELED	!	operation canceled
+-	ENOKEY	!	required key not available
+-	EKEYEXPIRED	!	key has expired
+-	EKEYREVOKED	!	key has been revoked
+-	EKEYREJECTED	!	key was rejected by service
+-	EOWNERDEAD	!	owner died
+-	ENOTRECOVERABLE	!	state not recoverable
+-	ERFKILL	!	operation not possible due to RF-kill
+-	EHWPOISON	!	memory page has hardware error
+-	EPROCLIM	soft	too many processes
+-	EBADRPC	hard	RPC structure is bad
+-	ERPCMISMATCH	hard	RPC version mismatch
+-	EPROGUNAVAIL	hard	RPC program unavailable
+-	EPROGMISMATCH	hard	program version mismatch
+-	EPROCUNAVAIL	hard	bad procedure for program
+-	EFTYPE	hard	bad file type
+-	EAUTH	hard	authentication error
+-	ENEEDAUTH	hard	not authenticated
+-	ERREMOTE	hard	object not local

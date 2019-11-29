@@ -1,2 +1,2 @@
 print ">> Updating sources"
-redo --no-log "$HOME/all"
+redo --no-log "$HOME/bin/all"

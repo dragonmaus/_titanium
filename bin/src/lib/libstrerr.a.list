@@ -1,0 +1,4 @@
+strerr.o
+strerr_die.o
+strerr_sys.o
+strerr_warn.o

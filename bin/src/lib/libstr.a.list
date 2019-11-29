@@ -1,0 +1,7 @@
+str_copy.o
+str_diff.o
+str_diffn.o
+str_find.o
+str_findr.o
+str_len.o
+str_start.o

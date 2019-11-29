@@ -1,0 +1,10 @@
+stralloc_append.o
+stralloc_cat.o
+stralloc_catb.o
+stralloc_catl.o
+stralloc_cats.o
+stralloc_copy.o
+stralloc_copyb.o
+stralloc_copys.o
+stralloc_ready.o
+stralloc_starts.o
