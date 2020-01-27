@@ -43,6 +43,7 @@
 /etc/wallpaper/*.zip
 /mbox
 /src/ext/
+/src/go/
 /src/rust/*.binary
 /src/rust/*/
 /tmp/

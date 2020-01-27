@@ -24,6 +24,7 @@ set -a
 # Paths
 PATH="$path"
 MANPATH="$HOME/.local/share/man:"
+GOPATH="$HOME/src/go/ext:$HOME/src/go"
 
 # Shell configuration
 ENV="$HOME/.shrc"
