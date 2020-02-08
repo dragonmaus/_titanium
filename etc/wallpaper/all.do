@@ -1,2 +1,2 @@
-redo-ifchange all.list
-xargs redo-ifchange < all.list
+redo-ifchange "$PWD.list"
+xargs -r redo-ifchange < "$PWD.list"

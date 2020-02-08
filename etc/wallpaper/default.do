@@ -47,7 +47,7 @@ find "$dest" -type f -exec chmod =rwx {} +
 				;;
 			esac
 		done
-		test "x$pid" = x || kill "$pid"
+		test "x$pid" = x || kill "$pid" 2> /dev/null || :
 	done
 )
 

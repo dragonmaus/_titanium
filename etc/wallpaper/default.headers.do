@@ -1,5 +1,11 @@
-redo-ifchange digitalblasphemy.sh "$HOME/bin/pass2netrc"
+redo-ifchange "$HOME/etc/secret/digitalblasphemy.netrc"
 redo-always
-. ./digitalblasphemy.sh
-uri="$uri/$2.zip"
-pass2netrc "$key" | curl -ILs --netrc-file /dev/fd/0 "$uri" | grep -iv '^Date: ' | redo-stamp
+
+uri="https://secure.digitalblasphemy.com/content/zips"
+curl -ILs --netrc-file "$HOME/etc/secret/digitalblasphemy.netrc" "$uri/$2.zip" \
+| sort -u \
+| grep -iv \
+	-e '^cf-ray: ' \
+	-e '^date: ' \
+	-e '^set-cookie: ' \
+| redo-stamp
