@@ -1,2 +1,0 @@
-#!/bin/sh
-exec nasm -I "$HOME"/src/lib/macro -f elf64 -w -macro-params "$@"

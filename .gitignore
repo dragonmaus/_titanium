@@ -32,12 +32,7 @@
 /.sndio/
 /.ssh/
 /.xsession-errors
-/bin/*
-/bin/src/*.s
-/bin/src/bin/*
-/bin/src/inc/error.h
-/bin/src/lib/*.s
-/bin/src/lib/error*.c
+/bin/
 /desk/
 /etc/secret/
 /etc/wallpaper/*.zip
@@ -47,8 +42,3 @@
 /src/rust/*.binary
 /src/rust/*/
 /tmp/
-!/bin/*.do
-!/bin/all.list
-!/bin/src/
-!/bin/src/bin/*.do
-!/bin/src/bin/*.sh
