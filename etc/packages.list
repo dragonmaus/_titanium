@@ -2,6 +2,7 @@
 GraphicsMagick--
 ald--
 bible-kjv--
+calc--
 dash--
 dillo--
 dmenu-custom--
@@ -13,6 +14,7 @@ git--
 go-tools--
 hack-fonts--
 hexedit--
+libqrencode--
 links+--
 nasm--
 neovim--
