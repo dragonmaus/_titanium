@@ -25,7 +25,8 @@ p7zip--
 pinta--
 pstree--
 quirks--
-rust--
+rust-clippy--
+rust-rustfmt--
 scrypt--
 slock-custom--
 st-custom--
