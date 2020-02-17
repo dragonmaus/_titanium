@@ -1,26 +1,26 @@
 PS1="${|
-	typeset pwd='${| typeset e=$? h="$( cd ~ && pwd )" p="$PWD/"; p="${p/#"$h/"/"~/"}"; REPLY="${p%/}"; return $e; }'
-	typeset r=$'\001\e[m\001'
-	typeset g=$'\001\e[32m\001'
-	typeset y=$'\001\e[33m\001'
-	typeset m=$'\001\e[35m\001'
-	typeset c=$'\001\e[36m\001'
-	REPLY=$'\001\r'
-	if [[ "$TERM" != linux && "$TERM" != linux-* ]]
-	then
-		REPLY+=$'\001\e];'
-		REPLY+='$HOSTNAME'
-		REPLY+=' '
-		REPLY+="[$pwd]"
-		REPLY+=' - '
-		REPLY+="$shell"
-		REPLY+=$'\a\001'
-	fi
-	REPLY+="($c\$USER$r@$m\$HOSTNAME$r)"
-	REPLY+=' '
-	REPLY+="$g\$( date +%T )$r"
-	REPLY+=' '
-	REPLY+="[$y$pwd$r]"
-	REPLY+=$'\n'
-	REPLY+='τ '
+  typeset pwd='${| typeset e=$? h="$( cd ~ && pwd )" p="$PWD/"; p="${p/#"$h/"/"~/"}"; REPLY="${p%/}"; return $e; }'
+  typeset r=$'\001\e[m\001'
+  typeset g=$'\001\e[32m\001'
+  typeset y=$'\001\e[33m\001'
+  typeset m=$'\001\e[35m\001'
+  typeset c=$'\001\e[36m\001'
+  REPLY=$'\001\r'
+  if [[ "$TERM" != linux && "$TERM" != linux-* ]]
+  then
+    REPLY+=$'\001\e];'
+    REPLY+='$HOSTNAME'
+    REPLY+=' '
+    REPLY+="[$pwd]"
+    REPLY+=' - '
+    REPLY+="$shell"
+    REPLY+=$'\a\001'
+  fi
+  REPLY+="($c\$USER$r@$m\$HOSTNAME$r)"
+  REPLY+=' '
+  REPLY+="$g\$( date +%T )$r"
+  REPLY+=' '
+  REPLY+="[$y$pwd$r]"
+  REPLY+=$'\n'
+  REPLY+='τ '
 }"

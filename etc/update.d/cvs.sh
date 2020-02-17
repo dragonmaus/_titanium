@@ -1,10 +1,10 @@
-print ">> Updating CVS repositories"
+echo '>> Updating CVS repositories'
 (
-	r="$( uname -r | tr . _ )"
-	for repo in /usr/{src,xenocara,ports}
-	do
-		[[ -d "$repo" ]] || continue
-		print -- "- $repo"
-		( cd "$repo" && exec cvs -q update -Pd -r "OPENBSD_$r" )
-	done
+  r="$( uname -r | tr . _ )"
+  for repo in /usr/{src,xenocara,ports}
+  do
+    [[ -d "$repo" ]] || continue
+    print -- "- $repo"
+    ( cd "$repo" && exec cvs -q update -Pd -r "OPENBSD_$r" )
+  done
 )

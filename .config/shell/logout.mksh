@@ -7,20 +7,20 @@
 #   - keep only the $HISTFILESIZE (default $HISTSIZE / 2) most recent entries
 if [[ -n "$HISTFILE" && -s "$HISTFILE" ]]
 then
-	histfile="$HISTFILE{new}"
-	histfilesize="${HISTFILESIZE:-"$(( ${HISTSIZE:-2047} / 2 ))"}"
-	print -s dummy # flush the last command to the history file
-	fc -ln 1 \
-	| sed 's/^\t//' \
-	| grep -Eav -e '^[[:blank:]]' -e '^[[:blank:]]*$' -e '^dummy$' \
-	| grep -Ea '^[[:blank:][:print:]]+$' \
-	| sed -E 's/^[[:blank:][:space:]]+//;s/[[:blank:][:space:]]+$//' \
-	| tac \
-	| awk '!a[$0]++' \
-	| head "-$histfilesize" \
-	| tac \
-	| mksh -i -c "HISTFILE='$histfile'; while IFS= read -rs; do :; done; unset HISTFILE" "$0"
-	fsync "$histfile"
-	mv -f "$histfile" "$HISTFILE"
-	unset histfile histfilesize
+  histfile="$HISTFILE{new}"
+  histfilesize="${HISTFILESIZE:-"$(( ${HISTSIZE:-2047} / 2 ))"}"
+  print -s dummy # flush the last command to the history file
+  fc -ln 1 \
+  | sed 's/^\t//' \
+  | grep -Eav -e '^[[:blank:]]' -e '^[[:blank:]]*$' -e '^dummy$' \
+  | grep -Ea '^[[:blank:][:print:]]+$' \
+  | sed -E 's/^[[:blank:][:space:]]+//;s/[[:blank:][:space:]]+$//' \
+  | tac \
+  | awk '!a[$0]++' \
+  | head "-$histfilesize" \
+  | tac \
+  | mksh -i -c "HISTFILE='$histfile'; while IFS= read -rs; do :; done; unset HISTFILE" "$0"
+  fsync "$histfile"
+  mv -f "$histfile" "$HISTFILE"
+  unset histfile histfilesize
 fi

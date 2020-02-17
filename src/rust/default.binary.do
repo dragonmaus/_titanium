@@ -1,4 +1,4 @@
 redo-always
 
-which "$2" > "$3"
+readlink -f "$( which "$2" )" > "$3"
 redo-stamp < "$3"

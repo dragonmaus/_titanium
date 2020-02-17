@@ -1,2 +1,2 @@
-print ">> Updating base system patches"
+echo '>> Updating base system patches'
 doas syspatch

@@ -1,2 +1,2 @@
-print ">> Updating wallpapers"
+echo '>> Updating wallpapers'
 redo --no-log "$HOME/etc/wallpaper/all"
