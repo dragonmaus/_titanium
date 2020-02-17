@@ -9,7 +9,7 @@ warn() {
   echo "$@" 1>&2
 }
 die() {
-  e="$?"
+  e="$1"
   shift
   warn "$@"
   exit "$e"
