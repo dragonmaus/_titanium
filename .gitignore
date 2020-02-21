@@ -35,6 +35,7 @@
 /bin/
 /desk/
 /etc/secret/
+/etc/wallpaper/*.list
 /etc/wallpaper/*.zip
 /mbox
 /src/ext/

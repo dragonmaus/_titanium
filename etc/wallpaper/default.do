@@ -1,4 +1,4 @@
-redo-ifchange "$2.suffix" "$2.zip"
+redo-ifchange "$2.suffix" "$2.zip" black.list white.list
 
 home="$( env - "PATH=$PATH" pwd )"
 
