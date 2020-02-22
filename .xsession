@@ -5,8 +5,8 @@ export PATH
 
 printenv DISPLAY >"$HOME/tmp/x.env.display"
 {
-	printenv | grep -e '^SSH_AGENT_PID=' -e '^SSH_AUTH_SOCK=' | sort
-	echo echo Agent pid \$SSH_AGENT_PID
+  printenv | grep -e '^SSH_AGENT_PID=' -e '^SSH_AUTH_SOCK=' | sort
+  echo echo Agent pid \$SSH_AGENT_PID
 } >"$HOME/tmp/x.env.ssh"
 nohup rmafter $$ "$HOME/tmp/x.env.display" "$HOME/tmp/x.env.ssh" 2>&1 >/dev/null &
 

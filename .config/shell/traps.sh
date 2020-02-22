@@ -1,12 +1,14 @@
 case "$shell" in
 (sh)
   _logout() {
-    [[ -r "$shell_config/logout.sh" ]] && . "$shell_config/logout.sh"
+    CONF="${XDG_CONFIG_HOME:-"$HOME/.config"}"
+    [[ -r "$CONF/logout.sh" ]] && . "$CONF/logout.sh"
   }
   ;;
 (*)
   _logout() {
-    for f in "$shell_config/logout.$shell" "$shell_config/logout.sh"
+    CONF="${XDG_CONFIG_HOME:-"$HOME/.config"}"
+    for f in "$CONF/logout.$shell" "$CONF/logout.sh"
     do
       if [[ -r "$f" ]]
       then

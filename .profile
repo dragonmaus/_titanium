@@ -7,27 +7,28 @@ shell="$( basename "$SHELL" )"
 shell="${shell:-sh}"
 case "$-" in
 (*i*)
-	exec "$shell" -l -c 'exec "$shell" -i "$@"' "$shell" "$@"
-	;;
+  exec "$shell" -l -c 'exec "$shell" -i "$@"' "$shell" "$@"
+  ;;
 esac
 
 # Ensure that `echo' is sane
 case "$KSH_VERSION" in
 (*MIRBSD\ KSH*|*LEGACY\ KSH*|*PD\ KSH*)
-	alias echo='print -R'
-	;;
+  echo() {
+    print -R "$@"
+  }
+  ;;
 (*)
-	echo() (
-		f='%s\n'
-		case "$1" in
-		(-n)
-			f='%s'
-			shift
-			;;
-		esac
-		printf "$f" "$*"
-	)
-	;;
+  echo() {
+    if [[ "$1" = -n ]]
+    then
+      shift
+      printf '%s' "$*"
+    else
+      printf '%s\n' "$*"
+    fi
+  }
+  ;;
 esac
 
 # XDG directories
@@ -35,19 +36,18 @@ CONF="${XDG_CONFIG_HOME:-"$HOME/.config"}"
 DATA="${XDG_DATA_HOME:-"$HOME/.local/share"}"
 
 # Clean up and augment PATH
-command -v realpath > /dev/null || realpath() ( readlink -f "$1" )
 path=
 ifs="$IFS"
 IFS=:
 for d in "$HOME/bin" "$HOME/.cargo/bin" "$HOME/src/go/bin" "$HOME/src/go/ext/bin" "$HOME/.local/bin" $PATH /usr/games
 do
-	d="$( realpath "$d" 2> /dev/null || echo "$d" )"
-	case ":$path:" in
-	(*":$d:"*)
-		continue
-		;;
-	esac
-	path="$path:$d"
+  d="$( readlink -f "$d" 2> /dev/null || echo "$d" )"
+  case ":$path:" in
+  (*":$d:"*)
+    continue
+    ;;
+  esac
+  path="$path:$d"
 done
 IFS="$ifs"
 path="${path#:}"
