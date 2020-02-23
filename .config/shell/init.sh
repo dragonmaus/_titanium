@@ -36,5 +36,7 @@ load options
 load prompt
 load traps
 
+load login
+
 unset -f load
 unset f shell shell_cache shell_config shell_data
