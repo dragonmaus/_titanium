@@ -1,15 +1,6 @@
 # ~/.profile
 
-# User-specific shell login profile
-
-# Enforce `separation of concerns' between login and interactive shells
-shell="$( basename "$SHELL" )"
-shell="${shell:-sh}"
-case "$-" in
-(*i*)
-  exec "$shell" -l -c 'exec "$shell" -i "$@"' "$shell" "$@"
-  ;;
-esac
+# User-specific shell profile
 
 # Ensure that `echo' is sane
 case "$KSH_VERSION" in
@@ -65,7 +56,6 @@ ENV="$CONF/shell/init.sh"
 
 ## Global configuration
 EDITOR="$( which nvim vim vi 2> /dev/null | head -1 )"
-HOSTNAME="${HOSTNAME:-"$( hostname -s )"}"
 LANG=en_US.UTF-8
 LC_COLLATE=C
 
@@ -74,6 +64,7 @@ HACKDIR="$HOME/.hack"
 
 set +a
 
+# Set umask
 umask 022
 
 # SSH agent
