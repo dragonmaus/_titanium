@@ -61,14 +61,12 @@ LC_COLLATE=C
 
 ## App-specific configuration
 HACKDIR="$HOME/.hack"
+[[ -f "$HOME/tmp/x.env.ssh" ]] && . "$HOME/tmp/x.env.ssh"
 
 set +a
 
 # Set umask
 umask 022
-
-# SSH agent
-[[ -f "$HOME/tmp/x.env.ssh" ]] && . "$HOME/tmp/x.env.ssh"
 
 # Update SSH environment
 f="$HOME/.ssh/environment"
