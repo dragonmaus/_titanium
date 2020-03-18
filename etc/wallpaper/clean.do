@@ -1,2 +1,2 @@
-rm -fv *.zip 1>&2
+rm -fv *.list *.zip 1>&2
 redo-always
