@@ -1,10 +1,11 @@
-echo() (
-  f='%s\n'
+echo() {
   case "$1" in
   (-n)
-    f='%s'
     shift
+    printf '%s' "$*"
+    ;;
+  (*)
+    printf '%s\n' "$*"
     ;;
   esac
-  printf "$f" "$*"
-)
+}

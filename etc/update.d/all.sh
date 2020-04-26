@@ -1,7 +1,7 @@
-for script in "$home/"*.sh
+for file in $home/*.sh
 do
-  if [[ -f "$script" && -s "$script" && -x "$script" ]]
+  if [[ -f $file && -s $file && -x $file ]]
   then
-    . "$script"
+    . $file
   fi
 done

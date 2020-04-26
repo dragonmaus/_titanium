@@ -1,2 +1,5 @@
 echo $$ | flock "$histfile.pid.lock" tee -a "$histfile.pid" > /dev/null
-while read -rs; do :; done < "$histfile"
+while read -rs
+do
+  :
+done < "$histfile"

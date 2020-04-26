@@ -24,7 +24,7 @@ function _hd {
     while (( i < ${#line[*]} ))
     do
       dn=
-      (( (hv = line[i++]) != 0 )) && dn="${line[i-1]#1#}"
+      (( (hv = line[i++]) != 0 )) && dn=${line[i-1]#1#}
       if (( (pos & 15) == 0 ))
       then
         (( pos )) && echo "$dasc|"
@@ -34,7 +34,7 @@ function _hd {
       echo -n "${hv#16#} "
       if [[ "$dn" = [[:print:]] ]]
       then
-        dasc+="$dn"
+        dasc+=$dn
       else
         dasc+=.
       fi

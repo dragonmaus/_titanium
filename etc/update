@@ -2,28 +2,17 @@
 
 set -e
 
-echo() {
-  print -R "$@"
-}
-warn() {
-  echo "$@" 1>&2
-}
-die() {
-  e="$1"
-  shift
-  warn "$@"
-  exit "$e"
-}
+. echo.sh
 
-home="$( cd "$0.d" && env - "PATH=$PATH" pwd )"
+home=$(cd "$0.d" && env - PATH="$PATH" pwd)
 
 [[ $# -eq 0 ]] && set -- all
 
 for arg
 do
-  file="$home/$arg.sh"
-  if [[ -f "$file" && -s "$file" ]]
+  file=$home/$arg.sh
+  if [[ -f $file && -s $file ]]
   then
-    . "$file"
+    . $file
   fi
 done

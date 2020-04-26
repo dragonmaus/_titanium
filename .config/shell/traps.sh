@@ -1,18 +1,18 @@
-case "$shell" in
+case $shell in
 (sh)
   _logout() {
-    shell_config="${XDG_CONFIG_HOME:-"$HOME/.config"}/shell"
-    [[ -r "$shell_config/logout.sh" ]] && . "$shell_config/logout.sh"
+    shell_config=${XDG_CONFIG_HOME:-~/.config}/shell
+    test -r "$shell_config/logout.sh" && . "$shell_config/logout.sh"
   }
   ;;
 (*)
   _logout() {
-    shell="${SHELL##*/}"
-    shell="${shell:-sh}"
-    shell_config="${XDG_CONFIG_HOME:-"$HOME/.config"}/shell"
+    shell=`basename $SHELL`
+    shell=${shell:-sh}
+    shell_config=${XDG_CONFIG_HOME:-~/.config}/shell
     for f in "$shell_config/logout.$shell" "$shell_config/logout.sh"
     do
-      if [[ -r "$f" ]]
+      if test -r "$f"
       then
         . "$f"
         return $?

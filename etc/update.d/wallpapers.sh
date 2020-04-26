@@ -1,2 +1,2 @@
 echo '>> Updating wallpapers'
-redo --no-log "$HOME/etc/wallpaper/all"
+redo --no-log ~/etc/wallpaper/all

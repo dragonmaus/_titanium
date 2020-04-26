@@ -1,9 +1,13 @@
+abspath
 c
 cargo-foreach
 cdiff
 dircp
 fix-screen
+fsync
+gensum
 git-ignore
+lndir
 n
 p
 pathsort

@@ -1,13 +1,13 @@
 alias lc='ls -C'
 alias ll='ls -Fl'
 
-case "$( uname )" in
+case "`uname`" in
 (OpenBSD)
   alias ls='ls -1A'
   ;;
 (*)
   alias ls='ls -1AN --color=auto'
-  alias pstree='pstree -achlnp'
+  alias pstree='pstree -Tachlnp'
   ;;
 esac
 

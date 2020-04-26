@@ -1,2 +1,2 @@
 HISTSIZE=12000
-histfile="$shell_data/history.$shell"
+histfile=$shell_data/history.$shell

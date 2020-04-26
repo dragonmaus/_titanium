@@ -1,11 +1,11 @@
 redo-ifchange "$2.suffix" "$2.zip" black.list white.list
 
-home="$( env - "PATH=$PATH" pwd )"
+home=$(env - PATH="$PATH" pwd)
 
-dest="$HOME/desk/pictures/wallpapers/$2/digitalblasphemy"
-file="$home/$2.zip"
-suff="$( head -1 < "$2.suffix" )"
-temp="$( env TMPDIR="$HOME/tmp" mktemp -d )"
+dest=$(xdg-user-dir BACKGROUNDS)/$2/digitalblasphemy
+file=$home/$2.zip
+suff=$(head -1 < "$2.suffix")
+temp=$(env TMPDIR=$HOME/tmp mktemp -d)
 
 trap -- "rm -fr '$temp'" EXIT INT KILL
 

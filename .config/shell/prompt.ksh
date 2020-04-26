@@ -10,16 +10,16 @@ PS1="$(
     echo -n '\001\e];'
     echo -n '$HOSTNAME'
     echo -n ' '
-    echo -n '[$( _pwd )]'
+    echo -n '[$(_pwd)]'
     echo -n ' - '
     echo -n "$shell"
     echo -n '\a\001'
   fi
   echo -n "($c\$USER$r@$m\$HOSTNAME$r)"
   echo -n ' '
-  echo -n "$g\$( date +%T )$r"
+  echo -n "$g\$(date +%T)$r"
   echo -n ' '
-  echo -n "[$y\$( _pwd )$r]"
+  echo -n "[$y\$(_pwd)$r]"
   echo
   echo -n 'τ '
 )"
