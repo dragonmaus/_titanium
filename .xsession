@@ -11,6 +11,8 @@ printenv DISPLAY > "$HOME/tmp/x.env.display"
 nohup rmafter $$ "$HOME/tmp/x.env.display" "$HOME/tmp/x.env.ssh" 2>&1 > /dev/null &
 
 randomise-wallpaper -s
+
+compton &
 xautolock -detectsleep -secure -locker slock -time 10 &
 
 xset +dpms
