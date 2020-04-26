@@ -9,6 +9,7 @@
 /.links/
 /.local/
 /.mono/
+/.mozilla/
 /.sndio/
 /.ssh/
 /.xsession-errors
