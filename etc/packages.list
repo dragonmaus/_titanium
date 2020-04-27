@@ -27,6 +27,7 @@ p7zip--
 pinta--
 pstree--
 quirks--
+redshift-console--
 rsync--
 rust-clippy--
 rust-rustfmt--
@@ -34,6 +35,7 @@ scrypt--
 slock-custom--
 st-custom--
 taisei--
+unclutter--
 wesnoth--
 xautolock--
 xdg-user-dirs--

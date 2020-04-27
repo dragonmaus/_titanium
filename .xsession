@@ -13,6 +13,8 @@ nohup rmafter $$ "$HOME/tmp/x.env.display" "$HOME/tmp/x.env.ssh" 2>&1 > /dev/nul
 randomise-wallpaper -s
 
 compton &
+redshift-hack &
+unclutter -jitter 5 &
 xautolock -detectsleep -secure -locker slock -time 10 &
 
 xset +dpms
