@@ -1,25 +1,28 @@
 #!/bin/sh
 
-PATH="$HOME/bin:$PATH"
+PATH=~/bin:$PATH
 export PATH
 
-printenv DISPLAY > "$HOME/tmp/x.env.display"
+# Set up environment exports
+printenv DISPLAY > ~/tmp/x.env.display
 {
   printenv | grep -e '^SSH_AGENT_PID=' -e '^SSH_AUTH_SOCK=' | sort
   echo echo Agent pid \$SSH_AGENT_PID
-} > "$HOME/tmp/x.env.ssh"
-nohup rmafter $$ "$HOME/tmp/x.env.display" "$HOME/tmp/x.env.ssh" 2>&1 > /dev/null &
+} > ~/tmp/x.env.ssh
+nohup rmafter $$ ~/tmp/x.env.* 2>&1 > /dev/null &
 
-randomise-wallpaper -s
-
-xcompmgr &
+# Start X services
 redshift-hack &
 unclutter -jitter 5 &
 xautolock -detectsleep -secure -locker slock -time 10 &
+xcompmgr &
 
+# Reset power management
 xset +dpms
 xset dpms 300 600 900
 xset s off
 
+# Start window manager
+randomise-wallpaper -s
 dstat wpi0 > /dev/null &
 exec dwm
