@@ -5,7 +5,6 @@ bible-kjv--
 buku--
 calc--
 dash--static
-dillo--
 dmenu-custom--
 dstat-custom--
 dwm-custom--
@@ -18,10 +17,8 @@ hack-fonts--
 hexedit--
 jq--
 libqrencode--
-links+--
 nasm--
 neovim--
-netsurf--
 openttd--
 p7zip--
 pinta--
