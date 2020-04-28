@@ -11,6 +11,9 @@ printenv DISPLAY > ~/tmp/x.env.display
 } > ~/tmp/x.env.ssh
 nohup rmafter $$ ~/tmp/x.env.* 2>&1 > /dev/null &
 
+# Start user services
+syncthing -no-browser &
+
 # Start X services
 redshift-hack &
 unclutter -jitter 5 &

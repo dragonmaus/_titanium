@@ -3,6 +3,7 @@
 /.Xauthority
 /.cache/
 /.cargo/
+/.dbus/
 /.dillo/
 /.forward
 /.hack/
