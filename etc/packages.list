@@ -2,6 +2,7 @@
 GraphicsMagick--
 ald--
 bible-kjv--
+buku--
 calc--
 dash--static
 dillo--
@@ -36,4 +37,3 @@ wesnoth--
 xautolock--
 xdg-user-dirs--
 xdotool--
-xsel--
