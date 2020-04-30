@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env dash
 #
 # A minimal alternative to djb redo that doesn't support incremental builds.
 # For the full version, visit http://github.com/apenwarr/redo
