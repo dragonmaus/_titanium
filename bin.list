@@ -13,7 +13,7 @@ p
 pathsort
 qdiff
 qr
-randomise-wallpaper
+randomise-backgrounds
 ratio
 redshift-hack
 relpath
@@ -21,7 +21,7 @@ remote-display
 rmafter
 rt
 screencap
-set-wallpaper
+set-desktop
 shar
 sshmenu
 syscall

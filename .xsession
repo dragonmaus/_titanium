@@ -26,6 +26,6 @@ xset dpms 300 600 900
 xset s off
 
 # Start window manager
-randomise-wallpaper -s
+randomise-backgrounds -d
 dstat wpi0 > /dev/null &
 exec dwm
