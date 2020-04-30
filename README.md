@@ -1,2 +1,2 @@
-# home
+# titanium
 My other home directory.
