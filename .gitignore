@@ -2,12 +2,9 @@
 /.*history
 /.Xauthority
 /.cache/
-/.cargo/
 /.dbus/
-/.dillo/
 /.forward
 /.hack/
-/.links/
 /.local/
 /.mono/
 /.mozilla/
