@@ -11,6 +11,9 @@ printenv DISPLAY > ~/tmp/x.env.display
 } > ~/tmp/x.env.ssh
 nohup rmafter $$ ~/tmp/x.env.* 2>&1 > /dev/null &
 
+# Set desktop background
+randomise-backgrounds -d
+
 # Start user services
 syncthing -no-browser &
 
@@ -26,6 +29,5 @@ xset dpms 300 600 900
 xset s off
 
 # Start window manager
-randomise-backgrounds -d
 dstat wpi0 > /dev/null &
 exec dwm
