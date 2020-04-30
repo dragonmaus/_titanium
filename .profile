@@ -57,6 +57,7 @@ PATH=$path
 ENV=$CONF/shell/init.sh
 
 ## Global configuration
+BROWSER=firefox
 EDITOR=`which nvim vim vi 2> /dev/null | head -1`
 LANG=en_US.UTF-8
 LC_COLLATE=C
