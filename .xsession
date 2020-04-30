@@ -3,6 +3,8 @@
 PATH=~/bin:$PATH
 export PATH
 
+. echo.sh
+
 # Set up environment exports
 printenv DISPLAY > ~/tmp/x.env.display
 {
