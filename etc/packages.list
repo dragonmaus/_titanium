@@ -1,5 +1,4 @@
 GraphicsMagick--
-buku--
 calc--
 dash--static
 dmenu-custom--
@@ -12,15 +11,17 @@ git--
 go-tools--
 hexedit--
 jq--
-keepassxc--browser
+keepassxc--
 nasm--
 neovim--
+node--
 p7zip--
-pinta--
 pstree--
 quirks--
 redshift-console--
 rsync--
+rust-clippy--
+rust-rustfmt--
 slock-custom--
 st-custom--
 syncthing--

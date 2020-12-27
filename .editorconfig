@@ -4,40 +4,42 @@ root = true
 
 [*]
 indent_style = space
-indent_size = 2
+indent_size = 4
 tab_width = 8
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{bat,cmd,reg,theme}]
+[*.{bat,cmd,ps1,reg,theme}]
 end_of_line = crlf
 
 [*.{diff,patch}]
 trim_trailing_whitespace = false
-
-[*.{fth,hs,lua,py}]
-indent_size = 4
 
 [*.go]
 indent_style = tab
 indent_size = tab
 tab_width = 4
 
+[*.{htm,html,svelte,xml}]
+indent_size = 1
+
 [{*.{i,m,mk,s},.gitconfig,Makefile*,crontab*,gitconfig}]
 indent_style = tab
 indent_size = tab
 
+[*.{json,md,sql,yaml,yml}]
+indent_size = 2
+
 [*.rs]
-indent_size = 4
 max_line_length = 99
 
 [*.txt]
 indent_style = tab
 indent_size = tab
-trim_trailing_whitespace = false
 
-[LICENSE]
+[LICENSE,LICENSE.txt]
+indent_style = space
 indent_size = 5
 max_line_length = 78

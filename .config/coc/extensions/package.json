@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "coc-rls": ">=1.1.6",
+    "coc-svelte": ">=0.2.1"
+  }
+}

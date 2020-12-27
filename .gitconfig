@@ -1,10 +1,7 @@
-[alias]
-	pwd = rev-parse --show-prefix
-	root = rev-parse --show-toplevel
-	skip = update-index --skip-worktree --
-	unskip = update-index --no-skip-worktree --
 [core]
 	autocrlf = false
+[pull]
+	rebase = false
 [push]
 	default = simple
 	followTags = true

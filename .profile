@@ -24,6 +24,18 @@ case "$KSH_VERSION" in
   ;;
 esac
 
+# Enforce `separation of concerns' between login and interactive shells
+shell=`basename $SHELL`
+shell=${shell:-sh}
+case $- in
+(*i*)
+  exec $shell -l -c 'exec $shell -i "$@"' $shell "$@"
+  ;;
+esac
+
+# Pull in Nix configuration
+test -e ~/.nix-profile/etc/profile.d/nix.sh && . ~/.nix-profile/etc/profile.d/nix.sh
+
 # XDG directories
 CONF=${XDG_CONFIG_HOME:-~/.config}
 DATA=${XDG_DATA_HOME:-~/.local/share}
@@ -32,9 +44,15 @@ DATA=${XDG_DATA_HOME:-~/.local/share}
 path=
 ifs=$IFS
 IFS=:
-for d in ~/bin ~/.cargo/bin ~/src/go/bin ~/src/go/ext/bin ~/.local/bin $PATH /usr/games
+for d in ~/bin ~/.cargo/bin ~/.local/bin $PATH /usr/games
 do
-  d=`realpath $d 2> /dev/null || echo $d`
+  case /$d/ in
+  (*/.nix-profile/*|*/nix/*)
+    ;;
+  (*)
+    d=`realpath $d 2> /dev/null || echo $d`
+    ;;
+  esac
   case ":$path:" in
   (*:$d:*)
     continue
@@ -49,7 +67,6 @@ path=${path#:}
 set -a
 
 ## Paths
-GOPATH=~/src/go/ext:~/src/go
 MANPATH=$DATA/man:
 PATH=$path
 
@@ -59,23 +76,23 @@ ENV=$CONF/shell/init.sh
 ## Global configuration
 BROWSER=firefox
 EDITOR=`which nvim vim vi 2> /dev/null | head -1`
-LANG=en_US.UTF-8
-LC_COLLATE=C
+HOSTNAME=${HOSTNAME:-`hostname -s`}
+PAGER=less; MANPAGER="$PAGER -s"
 
 ## App-specific configuration
 HACKDIR=~/.hack
+LESS=FMRXi
+LESSHISTFILE=-
+RIPGREP_CONFIG_PATH=$CONF/ripgrep/config
 
 set +a
 
-# Set umask
-umask 022
-
 # SSH agent
-test -f ~/tmp/x.env.ssh && . ~/tmp/x.env.ssh
+test -f ~/.ssh/agent.sh && . ~/.ssh/agent.sh
 
 # Update SSH environment
 f=~/.ssh/environment
 rm -f $f{new}
 grep -v '^PATH=' < $f > $f{new}
-echo "PATH='$PATH'" >> $f{new}
+echo "PATH=$PATH" >> $f{new}
 mv -f $f{new} $f
