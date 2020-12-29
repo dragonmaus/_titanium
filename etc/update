@@ -2,6 +2,7 @@
 
 doas true
 
+## System
 echo '>> Updating base system patches'
 doas syspatch
 
@@ -12,8 +13,8 @@ echo '>> Updating packages'
 doas pkg_add -u || :
 
 echo '>> Removing orphaned packages'
-t=`mktemp -d`
-trap -- "rm -fr '$t'" EXIT INT KILL
+t=$(mktemp -d)
+trap -- "rm -fr $t" EXIT INT KILL
 while :
 do
     (
@@ -56,6 +57,7 @@ pkg_info -mz | sort -u > $list{new}
 cmp -s $list{new} $list || mv -f $list{new} $list
 rm -f $list{new}
 
+## Nix
 if which nix > /dev/null 2>&1
 then
     echo '>> Updating Nix channels'
@@ -65,30 +67,42 @@ then
     nix-env -iA nixpkgs.nix
 fi
 
+## Rust
 if which rustup > /dev/null 2>&1
 then
     echo '>> Updating rust'
     rustup update
 fi
 
-if ! python -m pip --version > /dev/null 2>&1
+## Python
+python=$(which python python3 python2 2> /dev/null | head -1 | sed 's:.*/::')
+if [[ -z $python ]]
 then
-    echo '>> Installing pip'
-    f=`mktemp`
-    curl -L -o "$f" https://bootstrap.pypa.io/get-pip.py
-    python "$f" --user -qq
-    rm -f "$f"
+    echo '>> Python is not installed'
+else
+    if ! $python -m pip --version > /dev/null 2>&1
+    then
+        echo '>> Installing pip'
+        f=$(mktemp)
+        curl -L -o $f https://bootstrap.pypa.io/get-pip.py
+        $python $f --user -qq
+        rm -f $f
+    else
+        echo '>> Updating pip'
+        $python -m pip install -U --no-python-version-warning --user pip
+    fi
+
+    echo '>> Updating python packages'
+    $python -m pip list --format=json --no-python-version-warning --not-required \
+    | jq -r '.[] | .name' \
+    | xargs -r $python -m pip install -U --no-python-version-warning --upgrade-strategy=eager --user
 fi
 
-echo '>> Updating python packages'
-python -m pip list --format=json --no-python-version-warning --not-required \
-| jq -r '.[] | .name' \
-| xargs -r python -m pip install -U --no-python-version-warning --upgrade-strategy=eager --user
-
-if test -d "$0.d"
+## Other
+if [[ -d $0.d ]]
 then
-    for f in "$0.d"/*.sh
+    for f in $0.d/*.sh
     do
-        test -x "$f" && . "$f"
+        [[ -r $f && -x $f ]] && . $f
     done
 fi
