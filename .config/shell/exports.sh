@@ -1,5 +1,5 @@
 set -a
 
-GPG_TTY=`tty`
+GPG_TTY=$(tty)
 
 set +a

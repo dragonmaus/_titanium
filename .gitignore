@@ -5,6 +5,7 @@
 /.cargo/
 /.dbus/
 /.forward
+/.gnupg/
 /.hack/
 /.local/
 /.mozilla/

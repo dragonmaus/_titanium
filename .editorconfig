@@ -11,7 +11,7 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{bat,cmd,ps1,reg,theme}]
+[*.{bat,cmd,cs,csproj,ps1,reg,sln,theme}]
 end_of_line = crlf
 
 [*.{diff,patch}]
@@ -25,19 +25,15 @@ tab_width = 4
 [*.{htm,html,svelte,xml}]
 indent_size = 1
 
-[{*.{i,m,mk,s},.gitconfig,Makefile*,crontab*,gitconfig}]
+[{*.{i,m,mk,s,txt},.gitconfig,Makefile*,crontab*,gitconfig}]
 indent_style = tab
 indent_size = tab
 
-[*.{json,md,sql,yaml,yml}]
+[*.{json,yaml,yml}]
 indent_size = 2
 
 [*.rs]
 max_line_length = 99
-
-[*.txt]
-indent_style = tab
-indent_size = tab
 
 [LICENSE,LICENSE.txt]
 indent_style = space

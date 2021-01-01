@@ -1,5 +1,9 @@
 /QtProject.conf
+/coc/*
+/coc/extensions/*
 /configstore/
 /keepassxc/
 /mimeapps.list
 /syncthing/
+!/coc/extensions/
+!/coc/extensions/package.json

@@ -8,13 +8,12 @@ print -s dummy
 fc -ln 0 | sed 's/^	//' | flock "$histfile.lock" tee -a "$histfile" > /dev/null
 
 flock "$histfile.pid.lock" sh -c "
-  pgrep -x -U $(id -u) mksh \\
-  | grep -Fx -f '$histfile.pid' \\
-  | grep -Fvx $$ > '$histfile.pid{new}'
-  mv -f '$histfile.pid{new}' '$histfile.pid'
+    pgrep -x -U $(id -u) mksh \\
+    | grep -Fx -f '$histfile.pid' \\
+    | grep -Fvx $$ > '$histfile.pid{new}'
+    mv -f '$histfile.pid{new}' '$histfile.pid'
 " sh
 [[ -s "$histfile.pid" ]] && return 0
-
 [[ -s "$histfile" ]] || return 0
 
 : ${HISTSIZE:=2047}
@@ -27,15 +26,15 @@ flock "$histfile.pid.lock" sh -c "
 # - remove duplicate entries (keep last)
 # - keep only HISTFILESIZE most recent entries
 flock "$histfile.lock" sh -c "
-  rm -f '$histfile{new}'
-  ( grep -Eav -e '^[[:blank:]]' -e '^[[:blank:]]*$' -e '^dummy$' \\
-  | grep -Ea '^[[:blank:][:print:]]+$' \\
-  | sed -E -e 's/[[:blank:]]+$//' \\
-  | tac \\
-  | awk '!a[\$0]++' \\
-  | head -n $HISTFILESIZE \\
-  | tac \\
-  ) < '$histfile' > '$histfile{new}'
-  fsync '$histfile{new}' || :
-  mv -f '$histfile{new}' '$histfile'
+    rm -f '$histfile{new}'
+    ( grep -Eav -e '^[[:blank:]]' -e '^[[:blank:]]*$' -e '^dummy$' \\
+    | grep -Ea '^[[:blank:][:print:]]+$' \\
+    | sed -E -e 's/[[:blank:]]+$//' \\
+    | tac \\
+    | awk '!a[\$0]++' \\
+    | head -n $HISTFILESIZE \\
+    | tac \\
+    ) < '$histfile' > '$histfile{new}'
+    fsync '$histfile{new}' || :
+    mv -f '$histfile{new}' '$histfile'
 " sh

@@ -1,4 +1,4 @@
-shell=`basename $SHELL`
+shell=$(basename "$SHELL")
 shell=${shell:-sh}
 
 shell_cache=${XDG_CACHE_HOME:-~/.cache}/shell
@@ -8,22 +8,22 @@ mkdir -p "$shell_cache" "$shell_config" "$shell_data"
 
 case $shell in
 (sh)
-  load() {
-    test -r "$shell_config/$1.sh" && . "$shell_config/$1.sh"
-  }
-  ;;
+    load() {
+        [[ -r "$shell_config/$1.sh" ]] && . "$shell_config/$1.sh"
+    }
+    ;;
 (*)
-  load() {
-    for f in "$shell_config/$1.$shell" "$shell_config/$1.sh"
-    do
-      if test -r "$f"
-      then
-        . "$f"
-        return $?
-      fi
-    done
-  }
-  ;;
+    load() {
+        for f in "$shell_config/$1.$shell" "$shell_config/$1.sh"
+        do
+            if [[ -r "$f" ]]
+            then
+                . "$f"
+                return $?
+            fi
+        done
+    }
+    ;;
 esac
 
 load echo
