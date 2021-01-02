@@ -2,6 +2,10 @@ alias lc='ls -C'
 alias ll='ls -Fl'
 
 case "$(uname)" in
+(Darwin)
+    alias ls='ls -1AG'
+    alias pstree='pstree -wg3'
+    ;;
 (OpenBSD)
     alias ls='ls -1A'
     ;;
