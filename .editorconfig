@@ -14,13 +14,13 @@ insert_final_newline = true
 [*.{bat,cmd,cs,csproj,ps1,reg,sln,theme}]
 end_of_line = crlf
 
-[*.{diff,patch}]
-trim_trailing_whitespace = false
-
-[*.go]
+[*.{c,go,h}]
 indent_style = tab
 indent_size = tab
 tab_width = 4
+
+[*.{diff,patch}]
+trim_trailing_whitespace = false
 
 [*.{htm,html,svelte,xml}]
 indent_size = 1
