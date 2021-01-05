@@ -1,13 +1,16 @@
 #!/bin/sh
 
-case ":$PATH:" in
-(*:$HOME/bin:*)
-    ;;
-(*)
-    PATH=~/bin:$PATH
-    export PATH
-    ;;
-esac
+for p in ~/.local/bin ~/bin
+do
+    case ":$PATH:" in
+    (*:$p:*)
+        ;;
+    (*)
+        PATH=$p:$PATH
+        export PATH
+        ;;
+    esac
+done
 
 . echo.sh
 
