@@ -1,7 +1,13 @@
 #!/bin/sh
 
-PATH=~/bin:$PATH
-export PATH
+case ":$PATH:" in
+(*:$HOME/bin:*)
+    ;;
+(*)
+    PATH=~/bin:$PATH
+    export PATH
+    ;;
+esac
 
 . echo.sh
 
@@ -10,11 +16,17 @@ printenv DISPLAY > ~/tmp/x.env.display
 {
   printenv | grep -e '^SSH_AGENT_PID=' -e '^SSH_AUTH_SOCK=' | sort
   echo echo Agent pid \$SSH_AGENT_PID
-} > ~/tmp/x.env.ssh
+} > ~/.ssh/agent.sh
 nohup rmafter $$ ~/tmp/x.env.* 2>&1 > /dev/null &
 
 # Set desktop background
-randomise-backgrounds -d
+backgrounds=$(xdg-user-dir BACKGROUNDS)
+if [[ -f "$backgrounds/.current-desktop" ]]
+then
+    set-desktop "$backgrounds/.current-desktop"
+else
+    randomise-backgrounds -d
+fi
 
 # Start user services
 syncthing -no-browser &
