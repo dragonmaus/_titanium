@@ -36,8 +36,8 @@ syncthing -no-browser &
 
 # Start X services
 redshift-hack &
-unclutter -jitter 5 &
 xautolock -detectsleep -secure -locker slock -time 10 &
+xbanish -i control -i mod4 &
 xcompmgr &
 
 # Reset power management
