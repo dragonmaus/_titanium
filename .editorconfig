@@ -14,7 +14,7 @@ insert_final_newline = true
 [*.{bat,cmd,cs,csproj,ps1,reg,sln,theme}]
 end_of_line = crlf
 
-[*.{c,calc,go,h}]
+[{*.{c,calc,go,gophermap,gph,h},gophermap}]
 indent_style = tab
 indent_size = tab
 tab_width = 4
