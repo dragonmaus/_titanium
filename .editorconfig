@@ -19,7 +19,7 @@ indent_style = tab
 indent_size = tab
 tab_width = 4
 
-[*.{diff,patch}]
+[*.{diff,md,patch}]
 trim_trailing_whitespace = false
 
 [*.{htm,html,svelte,xml}]
