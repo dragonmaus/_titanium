@@ -25,7 +25,7 @@ trim_trailing_whitespace = false
 [*.{htm,html,svelte,xml}]
 indent_size = 1
 
-[{*.{i,m,mk,s,txt},.gitconfig,Makefile*,crontab*,gitconfig}]
+[{*.{conf,i,m,mk,s,txt},.gitconfig,Makefile*,crontab*,gitconfig}]
 indent_style = tab
 indent_size = tab
 
