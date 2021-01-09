@@ -9,6 +9,7 @@ call plug#begin(stdpath('data') . '/plug')
 
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'editorconfig/editorconfig-vim'
+Plug 'https://tildegit.org/sloum/gemini-vim-syntax'
 Plug 'git://r-36.net/geomyidae', { 'rtp': 'gph/vim' }
 Plug 'seanyeh/gopher.vim'
 Plug 'godlygeek/tabular'
