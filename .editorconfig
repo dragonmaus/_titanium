@@ -3,25 +3,25 @@
 root = true
 
 [*]
-indent_style = space
-indent_size = 4
-tab_width = 8
-end_of_line = lf
 charset = utf-8
-trim_trailing_whitespace = true
+end_of_line = lf
+indent_size = 4
+indent_style = space
 insert_final_newline = true
+tab_width = 8
+trim_trailing_whitespace = true
 
 [*.{bat,cmd,cs,csproj,ps1,reg,sln,theme}]
 end_of_line = crlf
 
 [{*.{c,calc,go,gophermap,gph,h},gophermap}]
-indent_style = tab
 indent_size = tab
+indent_style = tab
 tab_width = 4
 
 [{*.{conf,i,m,mk,s,txt},.gitconfig,Makefile*,crontab*,gitconfig}]
-indent_style = tab
 indent_size = tab
+indent_style = tab
 
 [*.{diff,md,patch}]
 trim_trailing_whitespace = false
@@ -36,6 +36,6 @@ indent_size = 2
 max_line_length = 99
 
 [LICENSE,LICENSE.txt]
-indent_style = space
 indent_size = 5
+indent_style = space
 max_line_length = 78
