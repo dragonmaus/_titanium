@@ -3,6 +3,8 @@
 [include]
 	path = ~/etc/gitconfig          # system-specific stuff
 	path = ~/etc/secret/gitconfig   # secret stuff
+[init]
+	defaultBranch = master
 [pull]
 	rebase = false
 [push]
