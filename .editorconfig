@@ -5,32 +5,32 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 4
-indent_style = space
+indent_size = tab
+indent_style = tab
 insert_final_newline = true
 tab_width = 8
 trim_trailing_whitespace = true
 
-[*.{bat,cmd,cs,csproj,ps1,reg,sln,theme}]
+[*.{bat,cmd,ps1,reg,theme}]
 end_of_line = crlf
 
-[{*.{c,calc,go,gophermap,gph,h},gophermap}]
-indent_size = tab
-indent_style = tab
+[*.{c,calc,go,h}]
 tab_width = 4
-
-[{*.{conf,i,m,mk,s,txt},.gitconfig,Makefile*,crontab*,gitconfig}]
-indent_size = tab
-indent_style = tab
 
 [*.{diff,md,patch}]
 trim_trailing_whitespace = false
 
-[*.{htm,html,svelte,xml}]
+[*.{htm,html,xml}]
 indent_size = 1
+indent_style = space
 
-[*.{json,yaml,yml}]
+[*.{json,vim,yaml,yml}]
 indent_size = 2
+indent_style = space
+
+[*.{md,py}]
+indent_size = 4
+indent_style = space
 
 [*.rs]
 max_line_length = 99
