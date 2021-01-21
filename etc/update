@@ -1,7 +1,5 @@
 #!/bin/sh
 
-doas true
-
 ## System
 echo '>> Updating base system patches'
 doas syspatch
@@ -18,13 +16,13 @@ leaves=$(mktemp)
 trap -- "rm -f $manual $leaves" EXIT INT KILL
 while :
 do
-    (
-        pkg_info -mz | sort -u > $manual
-        pkg_info -tz | sort -u > $leaves
-        set -A extra -- $(diff $manual $leaves | sed -n 's/> //p')
-        [[ ${#extra[@]} -eq 0 ]] && exit 1
-        doas pkg_delete "${extra[@]}"
-    ) || break
+	(
+		pkg_info -mz | sort -u > $manual
+		pkg_info -tz | sort -u > $leaves
+		set -- $(diff $manual $leaves | sed -n 's/> //p')
+		[ $# -eq 0 ] && exit 1
+		doas pkg_delete "$@"
+	) || break
 done
 rm -f $manual $leaves
 
@@ -34,52 +32,35 @@ pkg_info -mz | sort -u > $list{new}
 cmp -s $list{new} $list || mv -f $list{new} $list
 rm -f $list{new}
 
-## Nix
-if which nix > /dev/null 2>&1
-then
-    echo '>> Updating Nix channels'
-    nix-channel --update
-
-    echo '>> Updating Nix packages'
-    nix-env -iA nixpkgs.nix
-fi
-
 ## Rust
 if which rustup > /dev/null 2>&1
 then
-    echo '>> Updating rust'
-    rustup update
+	echo '>> Updating rust'
+	rustup update
 fi
 
 ## Python
-python=$(which python python3 python2 2> /dev/null | head -1 | sed 's:.*/::')
-if [[ -z $python ]]
+python=$(which python python3 python2 2> /dev/null | head -1)
+if [ -n "$python" ]
 then
-    echo '>> Python is not installed'
-else
-    if ! $python -m pip --version > /dev/null 2>&1
-    then
-        echo '>> Installing pip'
-        f=$(mktemp)
-        curl -L -o $f https://bootstrap.pypa.io/get-pip.py
-        $python $f --user -qq
-        rm -f $f
-    else
-        echo '>> Updating pip'
-        $python -m pip install -U --no-python-version-warning --user pip
-    fi
+	upgrade='install --user --upgrade --upgrade-strategy eager --use-pep517'
 
-    echo '>> Updating python packages'
-    $python -m pip list --format=json --no-python-version-warning --not-required \
-    | jq -r '.[] | .name' \
-    | xargs -r $python -m pip install -U --no-python-version-warning --upgrade-strategy=eager --user
+	echo '>> Ensuring that pip is installed'
+	$python -m ensurepip --user --default-pip
+
+	echo '>> Updating pip'
+	$python -m pip $upgrade pip
+
+	echo '>> Updating Python packages'
+	$python -m pip list --outdated --format freeze --not-required \
+	| sed 's/==.*//' | sort -u | xargs -r $python -m pip $upgrade
 fi
 
 ## Other
-if [[ -d $0.d ]]
+if [ -d "$0.d" ]
 then
-    for f in $0.d/*.sh
-    do
-        [[ -r $f && -x $f ]] && . $f
-    done
+	for f in "$0.d"/*.sh
+	do
+		[ -r "$f" -a -x "$f" ] && . "$f"
+	done
 fi
