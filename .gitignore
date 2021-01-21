@@ -8,7 +8,6 @@
 /.gnupg/
 /.hack/
 /.local/
-/.npm/
 /.sndio/
 /.ssh/
 /.xsel.log
