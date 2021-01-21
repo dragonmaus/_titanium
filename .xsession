@@ -30,10 +30,7 @@ else
 	randomise-backgrounds -d
 fi
 
-# Start user services
-syncthing -no-browser &
-
-# Start X services
+# Start background services
 redshift-hack &
 xautolock -detectsleep -secure -locker slock -time 10 &
 xbanish -i control -i mod4 &
