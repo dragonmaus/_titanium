@@ -1,5 +1,8 @@
 " Settings
-let g:is_ksh = 1
+let g:is_kornshell = 1
+if exists("g:is_bash")
+  unlet g:is_bash
+endif
 
 " Disable unwanted plugins
 let g:loaded_gzip = 1
