@@ -1,2 +1,2 @@
 # titanium
-My other home directory.
+## OpenBSD on ThinkPad Z61t
