@@ -83,7 +83,7 @@ PAGER=less; MANPAGER="$PAGER -s"
 HACKDIR=~/.hack
 LESS=FMRXi
 LESSHISTFILE=-
-RIPGREP_CONFIG_PATH=$CONF/ripgrep/config
+RIPGREP_CONFIG_PATH=$CONF/ripgrep.conf
 
 set +a
 
