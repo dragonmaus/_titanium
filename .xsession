@@ -1,34 +1,33 @@
 #!/bin/sh
 
-for p in ~/.local/bin ~/bin
+for p in ~/.local/bin ~/sbin ~/bin
 do
-    case ":$PATH:" in
-    (*:$p:*)
-        ;;
-    (*)
-        PATH=$p:$PATH
-        export PATH
-        ;;
-    esac
+	case ":$PATH:" in
+	(*:$p:*)
+		;;
+	(*)
+		PATH=$p:$PATH
+		export PATH
+		;;
+	esac
 done
 
 . echo.sh
 
-# Set up environment exports
-printenv DISPLAY > ~/tmp/x.env.display
+printenv DISPLAY > ~/.xsession-display
 {
-  printenv | grep -e '^SSH_AGENT_PID=' -e '^SSH_AUTH_SOCK=' | sort
-  echo echo Agent pid \$SSH_AGENT_PID
+	printenv | grep -e '^SSH_AGENT_PID=' -e '^SSH_AUTH_SOCK=' | sort
+	echo echo Agent pid \$SSH_AGENT_PID
 } > ~/.ssh/agent.sh
-nohup rmafter $$ ~/tmp/x.env.* 2>&1 > /dev/null &
+nohup rmafter $$ ~/.xsession-display 2>&1 > /dev/null &
 
 # Set desktop background
 backgrounds=$(xdg-user-dir BACKGROUNDS)
-if [[ -f "$backgrounds/.current-desktop" ]]
+if [ -f "$backgrounds/.current-desktop" ]
 then
-    set-desktop "$backgrounds/.current-desktop"
+	set-desktop "$backgrounds/.current-desktop"
 else
-    randomise-backgrounds -d
+	randomise-backgrounds -d
 fi
 
 # Start user services

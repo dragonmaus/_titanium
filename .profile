@@ -1,41 +1,14 @@
 # ~/.profile
-
-# User-specific shell profile
-
-# Ensure that `echo' is sane
-case "$KSH_VERSION" in
-(*'MIRBSD KSH'*|*'LEGACY KSH'*|*'PD KSH'*)
-    echo() {
-        print -R "$@"
-    }
-    ;;
-(*)
-    echo() {
-        case "$1" in
-        (-n)
-            shift
-            printf '%s' "$*"
-            ;;
-        (*)
-            printf '%s\n' "$*"
-            ;;
-        esac
-    }
-    ;;
-esac
+# User-specific login shell profile
 
 # Enforce `separation of concerns' between login and interactive shells
 shell=$(basename "$SHELL")
-shell=${shell:-sh}
+: ${shell:=sh}
 case $- in
 (*i*)
-    exec $shell -l -c 'exec $shell -i "$@"' $shell "$@"
-    ;;
+	exec $shell -l -c 'exec $shell -i "$@"' $shell "$@"
+	;;
 esac
-
-# Pull in Nix configuration
-nix=~/.nix-profile/etc/profile.d/nix.sh
-[[ -e $nix ]] && . $nix
 
 # XDG directories
 CONF=${XDG_CONFIG_HOME:-~/.config}
@@ -45,21 +18,15 @@ DATA=${XDG_DATA_HOME:-~/.local/share}
 path=
 ifs=$IFS
 IFS=:
-for d in ~/bin ~/sbin ~/.cargo/bin ~/.local/bin ~/.local/games ~/bin/ext $PATH /usr/games
+for d in ~/bin ~/sbin ~/.cargo/bin ~/.local/bin $PATH
 do
-    case /$d/ in
-    (*/.nix-profile/*|*/nix/*)
-        ;;
-    (*)
-        d=$(realpath $d 2> /dev/null || echo $d)
-        ;;
-    esac
-    case ":$path:" in
-    (*:$d:*)
-        continue
-        ;;
-    esac
-    path=$path:$d
+	d=$(readlink -f $d 2> /dev/null || echo $d)
+	case ":$path:" in
+	(*:$d:*)
+		continue
+		;;
+	esac
+	path=$path:$d
 done
 IFS=$ifs
 path=${path#:}
@@ -68,18 +35,19 @@ path=${path#:}
 set -a
 
 ## Paths
-MANPATH=$DATA/man:
+MANPATH=$DATA/man:$MANPATH
 PATH=$path
 
 ## Shell configuration
-ENV=$CONF/shell/init.sh
+ENV=~/.shrc
 
 ## Global configuration
-EDITOR=$(which nvim vim vi 2> /dev/null | head -1)
+EDITOR=nvim
 HOSTNAME=${HOSTNAME:-$(hostname -s)}
-PAGER=less; MANPAGER="$PAGER -s"
+PAGER=less
 
 ## App-specific configuration
+GPG_TTY=$(tty)
 HACKDIR=~/.hack
 LESS=FMRXi
 LESSHISTFILE=-
@@ -88,7 +56,7 @@ RIPGREP_CONFIG_PATH=$CONF/ripgrep.conf
 set +a
 
 # SSH agent
-[[ -f ~/.ssh/agent.sh ]] && . ~/.ssh/agent.sh
+[ -f ~/.ssh/agent.sh ] && . ~/.ssh/agent.sh
 
 # Update SSH environment
 f=~/.ssh/environment

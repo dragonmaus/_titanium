@@ -11,6 +11,7 @@
 /.sndio/
 /.ssh/
 /.xsel.log
+/.xsession-display
 /.xsession-errors
 /bin/
 /desk/
