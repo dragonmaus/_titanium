@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# Augment PATH
 for p in ~/.local/bin ~/sbin ~/bin
 do
 	case ":$PATH:" in
@@ -14,6 +15,7 @@ done
 
 . echo.sh
 
+# Export important variables
 printenv DISPLAY > ~/.xsession-display
 {
 	printenv | grep -e '^SSH_AGENT_PID=' -e '^SSH_AUTH_SOCK=' | sort
