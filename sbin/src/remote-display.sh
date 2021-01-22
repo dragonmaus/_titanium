@@ -3,8 +3,7 @@
 set -e
 
 file=~/tmp/x.env.display
-[ -r "$file" ] || exit 1
-
-display=$(head -1 < $file)
+[ -r "$file" ]
+read -r display < "$file"
 
 exec env DISPLAY="$display" "$@"
