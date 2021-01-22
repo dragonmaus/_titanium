@@ -2,7 +2,7 @@
 
 set -e
 
-file=~/tmp/x.env.display
+file=~/.xsession-display
 [ -r "$file" ]
 read -r display < "$file"
 
