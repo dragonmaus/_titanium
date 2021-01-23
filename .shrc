@@ -2,7 +2,15 @@
 # User-specific interactive shell configuration
 
 # Clean up environment
+HISTFILE=/dev/null
 unset HISTFILE
+case "$KSH_VERSION" in
+(*PD\ KSH*) # BSD ksh can handle history management without hurting itself
+	HISTCONTROL=ignoredups:ignorespace
+	HISTFILE=~/.history
+	HISTSIZE=$((HISTSIZE * 100))
+	;;
+esac
 unset LS_COLORS
 
 # Define aliases
