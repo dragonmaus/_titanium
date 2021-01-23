@@ -47,7 +47,6 @@ HOSTNAME=${HOSTNAME:-$(hostname -s)}
 PAGER=less
 
 ## App-specific configuration
-GPG_TTY=$(tty)
 HACKDIR=~/.hack
 LESS=FMRXi
 LESSHISTFILE=-
