@@ -4,55 +4,46 @@ set -e
 
 . echo.sh
 
-inc=5
-max=255
-
-getlevel() {
-	echo $(($(mixerctl -n outputs.master | cut -d , -f 1) * 100))
-}
-level2percent() {
-	echo $((level / max))
-}
-percent2level() {
-	echo $((percent * max))
-}
-printlevel() {
-	echo "$percent% ($((level / 100))/$max)"
-}
-roundlevel() {
-	print $(((level + ((100 - (level % 100)) % 100)) / 100))
-}
-roundpercent() {
-	print $((percent + ((inc - (percent % inc)) % inc)))
+round() {
+	set -- $(($1))
+	case $1 in
+	(*[0-4])
+		echo ${1%?}0
+		;;
+	(*[5-9])
+		echo $((${1%?} + 1))0
+		;;
+	esac
 }
 
-case "$*" in
+show() {
+	printf '%5.1f%%\n' $(echo $1 | sed -E 's/^([0-9])\.([0-9]{2})([0-9])$/\1\2.\3/')
+}
+
+set -- "$*"
+case "$1" in
 ('')
-	level=$(getlevel)
-	percent=$(level2percent)
-	level=$(percent2level)
-	printlevel
-	exit 0
+	show $(sndioctl -n output.level)
 	;;
 (+|-)
-	level=$(getlevel)
-	percent=$(level2percent)
-	percent=$(roundpercent)
-	percent=$((percent $1 inc))
-	[ $percent -lt 0 ] && percent=0
-	[ $percent -gt 100 ] && percent=100
-	level=$(percent2level)
-	printlevel
-	exec mixerctl -q outputs.master=$(roundlevel)
+	level=$(sndioctl -n output.level | tr -d . | sed -E 's/^0+//')
+	level=$(round $level)
+	level=$((level $1 50))
+	if [ $level -lt 0 ]
+	then
+		level=0
+	elif [ $level -gt 1000 ]
+	then
+		level=1000
+	fi
+	level=$(echo $level | sed 's/^/000/' | sed -E 's/^([0-9]*)([0-9]{3})$/\1.\2/')
+	show $(sndioctl -n output.level=$level)
 	;;
 ([0-9]|[1-9][0-9]|100)
-	percent=$(($1))
-	level=$(percent2level)
-	printlevel
-	exec mixerctl -q outputs.master=$(roundlevel)
+	show $(sndioctl -n output.level=0.${1}0)
 	;;
 (mute)
-	exec mixerctl -q outputs.master.mute=toggle
+	sndioctl -q output.mute=!
 	;;
 (*)
 	die 1 "$0: Invalid argument '$1'"
