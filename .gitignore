@@ -3,7 +3,6 @@
 /.Xauthority
 /.cache/
 /.cargo/
-/.dbus/
 /.forward
 /.gnupg/
 /.hack/
@@ -11,12 +10,10 @@
 /.local/
 /.sndio/
 /.ssh/
-/.xsel.log
 /.xsession-display
 /.xsession-errors
 /bin/
 /desk/
-/git/
 /mbox
 /src/
 /tmp/
