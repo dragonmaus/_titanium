@@ -30,6 +30,7 @@ redshift-console--
 rsync--
 rust-clippy--
 rust-rustfmt--
+scrypt--
 slock-custom--
 st-custom--
 stagit--
