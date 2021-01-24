@@ -43,17 +43,19 @@ fi
 python=$(which python python3 python2 2> /dev/null | head -1)
 if [ -n "$python" ]
 then
-	upgrade='install --user --upgrade --upgrade-strategy eager --use-pep517'
-
-	echo '>> Ensuring that pip is installed'
-	$python -m ensurepip --user --default-pip
+	if ! $python -m pip --version > /dev/null 2>&1
+	then
+		echo '>> Installing pip'
+		$python -m ensurepip --user --default-pip
+	fi
 
 	echo '>> Updating pip'
-	$python -m pip $upgrade pip
+	$python -m pip install --user --upgrade pip
 
 	echo '>> Updating Python packages'
-	$python -m pip list --outdated --format freeze --not-required \
-	| sed 's/==.*//' | sort -u | xargs -r $python -m pip $upgrade
+	$python -m pip list --format freeze --not-required \
+	| sed 's/==.*//' | grep -Fvx pip | sort -u \
+	| xargs -r $python -m pip install --user --upgrade
 fi
 
 ## Other
