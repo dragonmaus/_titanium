@@ -1,37 +1,18 @@
-#!/bin/sh
+#!/bin/ksh
 
-# Augment PATH
-for p in ~/.local/bin ~/sbin ~/bin
-do
-	case ":$PATH:" in
-	(*:$p:*)
-		;;
-	(*)
-		PATH=$p:$PATH
-		export PATH
-		;;
-	esac
-done
+# Pull in login environment
+[ -s /etc/profile ] && . /etc/profile
+[ -s ~/.profile ] && . ~/.profile
 
-. echo.sh
-
-# Export important variables
+# Export display name
 printenv DISPLAY > ~/.xsession-display
-{
-	printenv | grep -e '^SSH_AGENT_PID=' -e '^SSH_AUTH_SOCK=' | sort
-	echo echo Agent pid \$SSH_AGENT_PID
-} > ~/.ssh/agent.sh
 nohup rmafter $$ ~/.xsession-display 2>&1 > /dev/null &
 
 # Set desktop background
 backgrounds=$(xdg-user-dir BACKGROUNDS)
 if [ -s "$backgrounds/.current-desktop" ]
 then
-	(
-		cd "$backgrounds"
-		read -r desk < .current-desktop
-		set-desktop "$desk"
-	)
+	(cd "$backgrounds" && set-desktop "$(<.current-desktop)")
 else
 	randomise-backgrounds -d
 fi

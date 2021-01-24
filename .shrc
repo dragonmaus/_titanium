@@ -2,7 +2,7 @@
 # User-specific interactive shell configuration
 
 # Clean up environment
-HISTFILE=/dev/null
+HISTFILE=/dev/null  # some shells don't close HISTFILE when it's merely unset
 unset HISTFILE
 case "$KSH_VERSION" in
 (*PD\ KSH*) # BSD ksh can handle history management without hurting itself
@@ -35,7 +35,7 @@ ppwd() {
 
 # Set shell options
 # not all shells have `set -o physical'; brute force if necessary
-if COLUMNS=4 set -o | grep -q '^physical '
+if set -o | grep -q physical
 then
 	set -o physical
 else
