@@ -60,6 +60,5 @@ set +a
 # Update SSH environment
 f=~/.ssh/environment
 rm -f $f{new}
-grep -v '^PATH=' < $f > $f{new}
-echo "PATH=$PATH" >> $f{new}
+sed "s;^PATH=.*$;PATH=$PATH;" < $f > $f{new}
 mv -f $f{new} $f
