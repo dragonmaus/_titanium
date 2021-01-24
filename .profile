@@ -10,10 +10,6 @@ case $- in
 	;;
 esac
 
-# XDG directories
-CONF=${XDG_CONFIG_HOME:-~/.config}
-DATA=${XDG_DATA_HOME:-~/.local/share}
-
 # Clean up and augment PATH
 path=
 ifs=$IFS
@@ -35,7 +31,7 @@ path=${path#:}
 set -a
 
 ## Paths
-MANPATH=$DATA/man:$MANPATH
+MANPATH=~/.local/share/man:$MANPATH
 PATH=$path
 
 ## Shell configuration
@@ -48,9 +44,7 @@ PAGER=less
 
 ## App-specific configuration
 HACKDIR=~/.hack
-LESS=FMRXi
 LESSHISTFILE=-
-RIPGREP_CONFIG_PATH=$CONF/ripgrep.conf
 
 set +a
 
