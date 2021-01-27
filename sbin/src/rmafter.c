@@ -40,6 +40,10 @@ main(int argc, char **argv)
 		}
 	}
 
+	if (pledge("stdio cpath proc", NULL) != 0) {
+		err(EXIT_FAILURE, "pledge");
+	}
+
 	if ((kq = kqueue()) == -1) {
 		err(EXIT_FAILURE, "kqueue() error");
 	}
@@ -60,6 +64,10 @@ main(int argc, char **argv)
 	}
 
 	close(kq);
+
+	if (pledge("stdio cpath", NULL) != 0) {
+		err(EXIT_FAILURE, "pledge");
+	}
 
 	for (i = 2; i < argc; ++i) {
 		if (!unlink(argv[i])) {
