@@ -21,7 +21,7 @@ main(int argc, char **argv)
 	const char *errstr;
 
 	if (pledge("stdio cpath proc unveil", NULL) != 0) {
-		err(EXIT_FAILURE, "pledge");
+		err(EXIT_FAILURE, "Unable to restrict operations");
 	}
 
 	if (argc < 3) {
@@ -31,21 +31,21 @@ main(int argc, char **argv)
 
 	pid = (pid_t)strtonum(argv[1], 0, PID_MAX, &errstr);
 	if (errstr) {
-		err(EXIT_FAILURE, "strtonum() error: %s", errstr);
+		err(EXIT_FAILURE, "Unable to parse '%s'", argv[1]);
 	}
 
 	for (i = 2; i < argc; ++i) {
 		if (unveil(argv[i], "c") != 0) {
-			err(EXIT_FAILURE, "unveil");
+			err(EXIT_FAILURE, "Unable to unveil '%s'", argv[i]);
 		}
 	}
 
 	if (pledge("stdio cpath proc", NULL) != 0) {
-		err(EXIT_FAILURE, "pledge");
+		err(EXIT_FAILURE, "Unable to restrict operations");
 	}
 
 	if ((kq = kqueue()) == -1) {
-		err(EXIT_FAILURE, "kqueue() error");
+		err(EXIT_FAILURE, "Unable to create event queue");
 	}
 
 	EV_SET(&ch, pid, EVFILT_PROC, EV_ADD | EV_ENABLE, NOTE_EXIT, 0, 0);
@@ -53,11 +53,11 @@ main(int argc, char **argv)
 	for (;;) {
 		nev = kevent(kq, &ch, 1, &ev, 1, NULL);
 		if (nev < 0) {
-			err(EXIT_FAILURE, "kevent() error");
+			err(EXIT_FAILURE, "Unable to register event for PID %d", pid);
 		}
 		if (nev > 0) {
 			if (ev.flags & EV_ERROR) {
-				err(EXIT_FAILURE, "%s", argv[1]);
+				errx(EXIT_FAILURE, "Unable to register event for PID %d: No such process found", pid);
 			}
 			break;
 		}
@@ -66,11 +66,14 @@ main(int argc, char **argv)
 	close(kq);
 
 	if (pledge("stdio cpath", NULL) != 0) {
-		err(EXIT_FAILURE, "pledge");
+		err(EXIT_FAILURE, "Unable to restrict operations");
 	}
 
 	for (i = 2; i < argc; ++i) {
-		if (!unlink(argv[i])) {
+		if (unlink(argv[i]) != 0) {
+			warn("Unable to remove '%s'", argv[i]);
+		}
+		else {
 			printf("Removed file '%s'\n", argv[i]);
 		}
 	}
