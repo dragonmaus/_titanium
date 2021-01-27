@@ -38,7 +38,7 @@ ENV=~/.shrc
 
 ## App-specific configuration
 HACKDIR=~/.hack
-LESS=i
+LESS=Ri
 LESSHISTFILE=-
 PYTHONUSERBASE=~/.local/python
 
