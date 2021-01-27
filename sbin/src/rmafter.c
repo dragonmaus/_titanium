@@ -20,6 +20,10 @@ main(int argc, char **argv)
 	int kq, nev, i;
 	const char *errstr;
 
+	if (pledge("stdio cpath proc unveil", NULL) != 0) {
+		err(EXIT_FAILURE, "pledge");
+	}
+
 	if (argc < 3) {
 		fprintf(stderr, "Usage: %s pid file [file ...]\n", basename(*argv));
 		return EXIT_FAILURE;
@@ -28,6 +32,12 @@ main(int argc, char **argv)
 	pid = (pid_t)strtonum(argv[1], 0, PID_MAX, &errstr);
 	if (errstr) {
 		err(EXIT_FAILURE, "strtonum() error: %s", errstr);
+	}
+
+	for (i = 2; i < argc; ++i) {
+		if (unveil(argv[i], "c") != 0) {
+			err(EXIT_FAILURE, "unveil");
+		}
 	}
 
 	if ((kq = kqueue()) == -1) {
