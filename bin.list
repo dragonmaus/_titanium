@@ -4,6 +4,7 @@ cargo-foreach
 cdiff
 dircp
 fix-screen
+fnchk
 fsync
 gensum
 git-ignore
