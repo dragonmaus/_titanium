@@ -5,7 +5,7 @@
 HISTFILE=/dev/null  # some shells don't close HISTFILE when it's merely unset
 unset HISTFILE
 case "$KSH_VERSION" in
-(*PD\ KSH*) # BSD ksh can handle history management without hurting itself
+(*PD\ KSH*)  # BSD ksh can handle history management without hurting itself
 	HISTCONTROL=ignoredups:ignorespace
 	HISTFILE=~/.history
 	HISTSIZE=$((HISTSIZE * 100))
