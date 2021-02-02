@@ -8,7 +8,7 @@ echo '>> Updating system firmware'
 doas fw_update
 
 echo '>> Updating packages'
-doas pkg_add -u || :
+doas pkg_add -u
 
 echo '>> Removing orphaned packages'
 manual=$(mktemp)
@@ -25,6 +25,7 @@ do
 	) || break
 done
 rm -f $manual $leaves
+trap -- - EXIT INT KILL
 
 echo '>> Updating package list'
 list=~/etc/packages.list

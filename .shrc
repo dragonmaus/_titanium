@@ -1,24 +1,34 @@
 # ~/.shrc
-# User-specific interactive shell configuration
+# User-level interactive shell configuration
 
-# Clean up environment
-HISTFILE=/dev/null  # some shells don't close HISTFILE when it's merely unset
-unset HISTFILE
+case "$TERM" in
+(linux|vt???)
+	gui=false
+	;;
+(*)
+	gui=true
+	;;
+esac
+
+# Set up history management
 case "$KSH_VERSION" in
 (*PD\ KSH*)  # BSD ksh can handle history management without hurting itself
 	HISTCONTROL=ignoredups:ignorespace
 	HISTFILE=~/.history
 	HISTSIZE=$((HISTSIZE * 100))
 	;;
+(*)
+	HISTFILE=/dev/null  # some shells don't close HISTFILE when it's merely unset
+	unset HISTFILE
+	;;
 esac
-unset LS_COLORS
 
 # Define aliases
 alias doas='doas '
 alias lc='ls -C'
 alias ll='ls -Fl'
 alias ls='ls -1A'
-alias pstree='pstree -w'
+$gui && alias pstree='pstree -wg2' || alias pstree='pstree -w'
 
 # Define functions
 . echo.sh
@@ -34,11 +44,11 @@ ppwd() {
 }
 
 # Set shell options
-# not all shells have `set -o physical'; brute force if necessary
 if set -o | grep -q physical
 then
 	set -o physical
 else
+	# some shells don't have `physical'; brute force
 	cd() {
 		command cd "$@" && PWD=$(readlink -f .)
 	}
@@ -46,51 +56,27 @@ fi
 set -o vi
 
 # Set prompt
-if [ -n "$KSH_VERSION" ]
-then
-	PS1=$(
-		typeset cyan='\e[36m'
-		typeset green='\e[32m'
-		typeset magenta='\e[35m'
-		typeset ppwd='$(e=$?; ppwd; exit $e)'
-		typeset reset='\e[m'
-		typeset yellow='\e[33m'
-		case "$TERM" in
-		(linux|linux-*)
-			;;
-		(*)
-			print -n '\e];'
-			print -n '$HOSTNAME'
-			print -n ' '
-			print -n "[$ppwd]"
-			print -n ' '
-			print -n "$(basename $SHELL)"
-			print -n '\a'
-			;;
-		esac
-		print -n "($cyan\$USER$reset@$magenta\$HOSTNAME$reset)"
-		print -n ' '
-		print -n "$green\$(date +%T)$reset"
-		print -n ' '
-		print -n "[$yellow$ppwd$reset]"
-		print
-		print -n 'τ '
-	)
-else
-	PS1=$(
-		echo -n '($USER@$HOSTNAME)'
-		echo -n ' '
-		echo -n '$(date +%T)'
-		echo -n ' '
-		echo -n '[$(e=$?; ppwd; exit $e)]'
-		echo
-		echo -n 'τ '
-	)
-fi
+case "$KSH_VERSION" in
+(*PD\ KSH*)
+	PS1='(\[\e[36m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]) \[\e[32m\]\t\[\e[m\] [\[\e[33m\]\w\[\e[m\]] \nτ '
+	$gui && PS1='\[\e];\h [\w] \s\a\]'$PS1
+	;;
+(*MIRBSD\ KSH*)
+	PS1=$'\001\r'
+	$gui && PS1=$PS1$'\001\e];$HOSTNAME [$(e=$?; ppwd; exit $?)] ${SHELL##*/}\a\001'
+	PS1=$PS1$'(\001\e[36m\001$USER\001\e[m\001@\001\e[35m\001$HOSTNAME\001\e[m\001) \001\e[32m\001$(date +%T)\001\e[m\001 [\001\e[33m\001$(e=$?; ppwd; exit $?)\001\e[m\001]\nτ '
+	;;
+(*)
+	PS1='($USER@$HOSTNAME) $(date +%T) [$(e=$?; ppwd; exit $?)]'"$(echo; echo)"'τ '
+	;;
+esac
 
 # Set other environment variables
 GPG_TTY=$(tty)
 export GPG_TTY
 
-# Set exit trap
+# Set up exit trap
 trap -- '[ -r ~/.logout ] && . ~/.logout' EXIT
+
+# Clean up
+unset gui

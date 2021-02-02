@@ -17,7 +17,7 @@ else
 	randomise-backgrounds -d
 fi
 
-# Start background services
+# Start X services
 redshift-hack &
 xautolock -detectsleep -secure -locker slock -time 10 &
 xbanish -i control -i mod4 &

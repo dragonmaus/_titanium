@@ -1,13 +1,5 @@
 # ~/.profile
-# User-specific login shell profile
-
-# Enforce `separation of concerns' between login and interactive shells
-shell=$(basename $SHELL)
-case $- in
-(*i*)
-	exec $shell -l -c 'exec $shell -i "$@"' $shell "$@"
-	;;
-esac
+# User-level login shell configuration
 
 # Clean up and augment PATH
 path=
@@ -30,13 +22,13 @@ path=${path#:}
 set -a
 
 ## Paths
-MANPATH=~/.local/share/man:$MANPATH
+MANPATH=~/.local/share/man:
 PATH=$path
 
-## Shell configuration
+## Interactive shell configuration
 ENV=~/.shrc
 
-## App-specific configuration
+## Command-specific configuration
 HACKDIR=~/.hack
 LESS=Ri
 LESSHISTFILE=-
