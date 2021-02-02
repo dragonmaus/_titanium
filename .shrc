@@ -67,7 +67,8 @@ case "$KSH_VERSION" in
 	PS1=$PS1$'(\001\e[36m\001$USER\001\e[m\001@\001\e[35m\001$HOSTNAME\001\e[m\001) \001\e[32m\001$(date +%T)\001\e[m\001 [\001\e[33m\001$(e=$?; ppwd; exit $?)\001\e[m\001]\nτ '
 	;;
 (*)
-	PS1='($USER@$HOSTNAME) $(date +%T) [$(e=$?; ppwd; exit $?)]'"$(echo; echo)"'τ '
+	PS1='($USER@$HOSTNAME) $(date +%T) [$(e=$?; ppwd; exit $?)]
+τ '
 	;;
 esac
 
