@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 ## System
 echo '>> Updating base system patches'
 doas syspatch
@@ -8,7 +10,7 @@ echo '>> Updating system firmware'
 doas fw_update
 
 echo '>> Updating packages'
-doas pkg_add -u
+doas pkg_add -u || :
 
 echo '>> Removing orphaned packages'
 manual=$(mktemp)
