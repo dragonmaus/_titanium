@@ -1,6 +1,5 @@
 GraphicsMagick--
 bgs--
-bombadillo--
 calc--
 cmark--
 dash--static
@@ -16,8 +15,6 @@ jq--
 keepassxc--
 libqrencode--
 lynx--
-nasm--
-neovim--
 p7zip-rar--
 pkglocatedb--
 pstree--
@@ -27,13 +24,11 @@ redshift-console--
 rsync--
 rust-clippy--
 rust-rustfmt--
-scrypt--
 slock-custom--
 st-custom--
 stagit--
 stagit-gopher--
 syncthing--
-wol--
 xautolock--
 xbanish--
 xclip--
