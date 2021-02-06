@@ -3,8 +3,11 @@
 set -e
 
 ## System
-echo '>> Updating base system patches'
-doas syspatch
+if [ -z "$(sysctl -n kern.version | sed 's/^OpenBSD [1-9][0-9]*\.[0-9]\([^ ]*\).*/\1/;q')" ]
+then
+	echo '>> Updating base system patches'
+	doas syspatch
+fi
 
 echo '>> Updating system firmware'
 doas fw_update
