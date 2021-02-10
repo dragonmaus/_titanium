@@ -59,7 +59,7 @@ then
 	$python -m pip install --user --upgrade pip
 
 	echo '>> Updating Python packages'
-	$python -m pip list --format freeze --not-required \
+	$python -m pip list --user --not-required --format freeze \
 	| sed 's/==.*//' | grep -Fvx pip | sort -u \
 	| xargs -r $python -m pip install --user --upgrade
 fi
