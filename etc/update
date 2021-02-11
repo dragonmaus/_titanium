@@ -39,7 +39,6 @@ cmp -s $list{new} $list || mv -f $list{new} $list
 rm -f $list{new}
 simple=~/etc/packages.simple
 sed 's/-[^-]*-[^-]*$//' < $list \
-| sed -e 's/-custom//' -e 's/^redshift-console$/redshift/' \
 | tr '[:upper:]' '[:lower:]' \
 | sort -u \
 > $simple{new}
