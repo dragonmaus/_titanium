@@ -37,6 +37,14 @@ list=~/etc/packages.list
 pkg_info -mz | sort -u > $list{new}
 cmp -s $list{new} $list || mv -f $list{new} $list
 rm -f $list{new}
+simple=~/etc/packages.simple
+sed 's/-[^-]*-[^-]*$//' < $list \
+| sed -e 's/-custom//' -e 's/^redshift-console$/redshift/' \
+| tr '[:upper:]' '[:lower:]' \
+| sort -u \
+> $simple{new}
+cmp -s $simple{new} $simple || mv -f $simple{new} $simple
+rm -f $simple{new}
 
 ## Rust
 if which rustup > /dev/null 2>&1
