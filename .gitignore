@@ -2,6 +2,7 @@
 /.Xauthority
 /.cache/
 /.cargo/
+/.dbus/
 /.gnupg/
 /.hack/
 /.history
