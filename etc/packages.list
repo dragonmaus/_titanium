@@ -11,6 +11,7 @@ git--
 gnupg--%gnupg2
 jq--
 keepassxc--
+lagrange--
 libqrencode--
 lynx--
 p7zip-rar--
