@@ -21,13 +21,11 @@ leaves=$(mktemp)
 trap -- "rm -f $manual $leaves" EXIT INT KILL
 while :
 do
-	(
-		pkg_info -mz | sort -u > $manual
-		pkg_info -tz | sort -u > $leaves
-		set -- $(diff $manual $leaves | sed -n 's/> //p')
-		[ $# -eq 0 ] && exit 1
-		doas pkg_delete "$@"
-	) || break
+	pkg_info -mz | sort -u > $manual
+	pkg_info -tz | sort -u > $leaves
+	set -- $(diff $manual $leaves | sed -n 's/> //p')
+	[ $# -eq 0 ] && break
+	doas pkg_delete "$@"
 done
 rm -f $manual $leaves
 trap -- - EXIT INT KILL
