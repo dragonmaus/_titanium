@@ -22,6 +22,7 @@ python--%3.8
 quirks--
 redshift-console--
 rsync--
+rust--
 rust-clippy--
 rust-rustfmt--
 slock-custom--
