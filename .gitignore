@@ -1,8 +1,6 @@
 *-
-/.Xauthority
 /.cache/
 /.cargo/
-/.dbus/
 /.gnupg/
 /.hack/
 /.history
@@ -10,7 +8,6 @@
 /.lynxrc
 /.sndio/
 /.ssh/
-/.xsession-*
 /bin/
 /desk/
 /mbox
