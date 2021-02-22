@@ -15,8 +15,5 @@ pstree
 python
 quirks
 rsync
-rust
-rust-clippy
-rust-rustfmt
 syncthing
 xdg-user-dirs

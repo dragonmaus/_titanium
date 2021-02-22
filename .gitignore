@@ -1,6 +1,5 @@
 *-
 /.cache/
-/.cargo/
 /.gnupg/
 /.hack/
 /.history
