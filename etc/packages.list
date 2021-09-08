@@ -2,7 +2,7 @@ calc--
 cmatrix--
 dash--static
 git--
-gnupg--%gnupg2
+gnupg--
 jq--
 libqrencode--
 lynx--
