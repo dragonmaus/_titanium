@@ -15,4 +15,5 @@ python--%3.8
 quirks--
 rsync--
 syncthing--
+sysclean--
 xdg-user-dirs--

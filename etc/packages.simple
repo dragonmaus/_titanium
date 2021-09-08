@@ -15,4 +15,5 @@ python
 quirks
 rsync
 syncthing
+sysclean
 xdg-user-dirs
