@@ -58,12 +58,17 @@ set -o vi
 # Set prompt
 case "$KSH_VERSION" in
 (*PD\ KSH*)
-	PS1='(\[\e[36m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]) \[\e[32m\]\t\[\e[m\] [\[\e[33m\]\w\[\e[m\]] {\[\e[31m\]$?\[\e[m\]}\n\$ '
+	PS1='(\[\e[36m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]) \[\e[32m\]\t\[\e[m\] [\[\e[33m\]\w\[\e[m\]] {\[\e[31m\]$?\[\e[m\]}\nτ '
 	$gui && PS1='\[\e];\h [\w] \s\a\]'$PS1
+	;;
+(*MIRBSD\ KSH*)
+	PS1=$'\001\r'
+	$gui && PS1=$PS1$'\001\e];$HOSTNAME [$(e=$?; ppwd; exit $?)] ${SHELL##*/}\a\001'
+	PS1=$PS1$'(\001\e[36m\001$USER\001\e[m\001@\001\e[35m\001$HOSTNAME\001\e[m\001) \001\e[32m\001$(date +%T)\001\e[m\001 [\001\e[33m\001$(e=$?; ppwd; exit $?)\001\e[m\001] {\001\e[31m\001$?\001\e[m\001}\nτ '
 	;;
 (*)
 	PS1='($USER@$HOSTNAME) $(date +%T) [$(e=$?; ppwd; exit $?)] {$?}
-$ '
+τ '
 	;;
 esac
 
