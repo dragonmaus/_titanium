@@ -1,1 +1,4 @@
-../../bin/src/.gitignore
+/*.binary
+/*.deps
+/*.exe
+/*.o
