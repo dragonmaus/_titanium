@@ -1,8 +1,12 @@
 calc
 cmatrix
 dash
+dmenu-custom
+dstat-custom
+dwm-custom
 git
 gnupg
+gophernicus
 jq
 libqrencode
 lynx
@@ -13,7 +17,10 @@ portslist
 pstree
 python
 quirks
+redshift-console
 rsync
+slock-custom
+st-custom
 syncthing
 sysclean
 xdg-user-dirs
