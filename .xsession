@@ -1,12 +1,12 @@
 #!/bin/ksh
 
 # Pull in login environment
-[ -s /etc/profile ] && . /etc/profile
-[ -s ~/.profile ] && . ~/.profile
+[ -r /etc/profile ] && . /etc/profile
+[ -r ~/.profile ] && . ~/.profile
 
 # Export display name
 printenv DISPLAY > ~/.xsession-display
-nohup rmafter $$ ~/.xsession-display 2>&1 > /dev/null &
+nohup rmafter $$ ~/.xsession-display > /dev/null 2>&1 &
 
 # Set desktop background
 backgrounds=$(xdg-user-dir BACKGROUNDS)

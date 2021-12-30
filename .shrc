@@ -11,17 +11,9 @@ case "$TERM" in
 esac
 
 # Set up history management
-case "$KSH_VERSION" in
-(*PD\ KSH*)  # BSD ksh can handle history management without hurting itself
-	HISTCONTROL=ignoredups:ignorespace
-	HISTFILE=~/.history
-	HISTSIZE=$((HISTSIZE * 100))
-	;;
-(*)
-	HISTFILE=/dev/null  # some shells don't close HISTFILE when it's merely unset
-	unset HISTFILE
-	;;
-esac
+HISTCONTROL=ignoredups:ignorespace
+HISTFILE=~/.history
+HISTSIZE=$((HISTSIZE * 100))
 
 # Define aliases
 alias doas='doas '
@@ -31,7 +23,18 @@ alias ls='ls -1A'
 $gui && alias pstree='pstree -wg2' || alias pstree='pstree -w'
 
 # Define functions
-. echo.sh
+echo() {
+	print -R "$@"
+}
+warn() {
+	echo "$@" >&2
+}
+die() {
+	e=$1
+	shift
+	warn "$@"
+	exit "$e"
+}
 ppwd() {
 	local h=$(cd ~ && pwd)
 	local p=$PWD/
@@ -44,37 +47,15 @@ ppwd() {
 }
 
 # Set shell options
-if set -o | grep -q physical
-then
-	set -o physical
-else
-	# some shells don't have `physical'; brute force
-	cd() {
-		command cd "$@" && PWD=$(readlink -f .)
-	}
-fi
+set -o physical
 set -o vi
 
 # Set prompt
-case "$KSH_VERSION" in
-(*PD\ KSH*)
-	PS1='(\[\e[36m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]) \[\e[32m\]\t\[\e[m\] [\[\e[33m\]\w\[\e[m\]] {\[\e[31m\]$?\[\e[m\]}\nτ '
-	$gui && PS1='\[\e];\h [\w] \s\a\]'$PS1
-	;;
-(*MIRBSD\ KSH*)
-	PS1=$'\001\r'
-	$gui && PS1=$PS1$'\001\e];$HOSTNAME [$(e=$?; ppwd; exit $?)] ${SHELL##*/}\a\001'
-	PS1=$PS1$'(\001\e[36m\001$USER\001\e[m\001@\001\e[35m\001$HOSTNAME\001\e[m\001) \001\e[32m\001$(date +%T)\001\e[m\001 [\001\e[33m\001$(e=$?; ppwd; exit $?)\001\e[m\001] {\001\e[31m\001$?\001\e[m\001}\nτ '
-	;;
-(*)
-	PS1='($USER@$HOSTNAME) $(date +%T) [$(e=$?; ppwd; exit $?)] {$?}
-τ '
-	;;
-esac
+PS1='(\[\e[36m\]\u\[\e[m\]@\[\e[35m\]\h\[\e[m\]) \[\e[32m\]\t\[\e[m\] [\[\e[33m\]\w\[\e[m\]] {\[\e[31m\]$?\[\e[m\]}\nτ '
+$gui && PS1='\[\e];\h [\w] \s\a\]'$PS1
 
 # Set other environment variables
-GPG_TTY=$(tty)
-export GPG_TTY
+GPG_TTY=$(tty); export GPG_TTY
 
 # Set up exit trap
 trap -- '[ -r ~/.logout ] && . ~/.logout' EXIT

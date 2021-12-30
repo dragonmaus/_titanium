@@ -5,7 +5,7 @@
 path=
 ifs=$IFS
 IFS=:
-for d in ~/bin ~/sbin ~/.cargo/bin ~/.local/bin ~/.local/python/bin ~/go/bin $PATH
+for d in ~/bin ~/sbin ~/.cargo/bin ~/.local/bin ~/.local/go/bin ~/.local/python/bin $PATH
 do
 	d=$(readlink -f $d 2> /dev/null || echo $d)
 	case ":$path:" in
@@ -22,17 +22,18 @@ path=${path#:}
 set -a
 
 ## Paths
+GOBIN=~/.local/go/bin
+GOPATH=~/.local/go:~/src/go
 MANPATH=~/.local/share/man:
 PATH=$path
+PYTHONUSERBASE=~/.local/python
 
 ## Interactive shell configuration
 ENV=~/.shrc
 
 ## Command-specific configuration
-HACKDIR=~/.hack
 LESS=Ri
 LESSHISTFILE=-
-PYTHONUSERBASE=~/.local/python
 RIPGREP_CONFIG_PATH=~/.config/ripgrep.conf
 
 set +a
